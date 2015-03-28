@@ -1,5 +1,7 @@
 # Stefan's dotfiles
 
+![Screenshot of vim and shell prompt](https://raw.githubusercontent.com/hoffi/dotfiles/master/screenshot.png)
+
 ## Installation
 Clone the repo and run the install script:
 ```bash
