@@ -1,0 +1,27 @@
+[color]
+  ui = true
+[alias]
+  # Print last SHA
+  last-sha = rev-parse HEAD
+
+  mt = mergetool                    # fire up the merge tool
+
+[mergetool]
+  prompt = false
+  trustExitCode = true
+  keepBackup = false
+[merge]
+  prompt = false
+  tool = vimdiff
+  conflictstyle = diff3
+[apply]
+  whitespace = nowarn
+[push]
+  default = current
+[core]
+  autocrlf = input
+  savecrlf = true
+  editor = vim
+  excludesfile = ~/.gitignore_global
+[include]
+  path = ~/.gitconfig.user
