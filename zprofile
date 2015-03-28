@@ -44,7 +44,8 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
-  ~/.dotfiles/mux
+  ~/.dotfiles/bin
+  ~/.dotfiles/bin/mux
   $path
 )
 

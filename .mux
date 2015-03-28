@@ -1,0 +1,5 @@
+session :dotfiles
+rename :editor
+command 'vim .'
+
+new_window :shell
