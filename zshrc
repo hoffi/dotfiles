@@ -34,3 +34,8 @@ alias branch_rubocop="branch_files | grep '\.rb$' | xargs rubocop"
 alias bbb='browse bitbucket_repo_url'
 alias bbbr='browse bitbucket_review_url'
 alias bred='browse redmine_url'
+
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zshrc.after" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zshrc.after"
+fi
