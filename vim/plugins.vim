@@ -8,9 +8,6 @@ let g:syntastic_auto_jump = 0
 let g:syntastic_enable_signs = 1
 let g:syntastic_ruby_checkers = ['rubocop']
 
-" ----- airblade/vim-gitgutter settings -----
-hi clear SignColumn
-
 " ----- Shougo/unite.vim settings -----
 let g:unite_source_history_yank_enable = 1
 
@@ -155,11 +152,3 @@ let g:tmux_navigator_no_mappings = 1
 " ---- Splitjoin settings ----
 nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
-
-" GitGutter
-let g:gitgutter_realtime = 0    " Pretty annoying
-let g:gitgutter_eager = 0
-let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '✎'
-let g:gitgutter_sign_removed = 'x'

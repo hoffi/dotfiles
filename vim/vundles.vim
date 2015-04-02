@@ -11,19 +11,15 @@
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
-set rtp+=~/.vim/vundles/ "Submodules
 call vundle#rc()
 
 " ----- VUNDLES -----
 
 """ General
 Bundle "gmarik/vundle"
-Bundle "xolox/vim-misc"
 Bundle "Shougo/vimproc.vim"
 " Enables % keybinding for many languages
 Bundle "vim-scripts/matchit.zip"
-" Shows changes in gutter
-Bundle "airblade/vim-gitgutter"
 " Run Async commands with tmux
 Bundle "tpope/vim-dispatch.git"
 Bundle "christoomey/vim-tmux-navigator"
@@ -37,8 +33,6 @@ Bundle "morhetz/gruvbox"
 Bundle "sheerun/vim-polyglot"
 " Dims inactive Splits
 Bundle "blueyed/vim-diminactive"
-" Underlines all occurences of the word under cursor
-Bundle "itchyny/vim-cursorword"
 " Shows buffers in the tabline
 Bundle "ap/vim-buftabline"
 
@@ -65,12 +59,6 @@ Bundle "Shougo/unite-outline.git"
 Bundle "Shougo/vimfiler"
 
 " -------------------
-
-" The plugins listed in ~/.vim/.vundles.local will be added here to
-" allow the user to add vim plugins to yadr without the need for a fork.
-if filereadable(expand("~/.yadr/vim/.vundles.local"))
-  source ~/.yadr/vim/.vundles.local
-endif
 
 "Filetype plugin indent on is required by vundle
 filetype plugin indent on
