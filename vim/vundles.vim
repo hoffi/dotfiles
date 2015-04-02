@@ -22,8 +22,6 @@ Bundle "xolox/vim-misc"
 Bundle "Shougo/vimproc.vim"
 " Enables % keybinding for many languages
 Bundle "vim-scripts/matchit.zip"
-" Git support
-Bundle "tpope/vim-fugitive"
 " Shows changes in gutter
 Bundle "airblade/vim-gitgutter"
 " Run Async commands with tmux

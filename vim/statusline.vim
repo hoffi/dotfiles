@@ -30,10 +30,9 @@ function! StatusLineColor(mode)
 endfunction
 
 set statusline=%<\ %{StatusLineColor(mode())}
-set statusline+=\ \|\ ⭠\ %{fugitive#head()}
-set statusline+=\ \|\ %f%2*%m%r%h%w%*
+set statusline+=\ \|\ %t%2*%m%r%h%w%*
 set statusline+=%=
 set statusline+=%1*%{SyntasticStatuslineFlag()}%*
 set statusline+=\ %{strlen(&fenc)?&fenc:&enc}%y
-set statusline+=\ [line\ %l\/%L\ %p%%]\ %*
+set statusline+=\ [line\ %l\/%L]\ %*
 
