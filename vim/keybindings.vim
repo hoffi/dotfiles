@@ -1,12 +1,4 @@
 " ----- Custom keybindings ----------------------------------------------------
-" Make navigating long, wrapped lines behave like normal lines
-noremap <silent> k gk
-noremap <silent> j gj
-noremap <silent> 0 g0
-noremap <silent> $ g$
-noremap <silent> ^ g^
-noremap <silent> _ g_
-
 " use 'Y' to yank to the end of a line, instead of the whole line
 noremap <silent> Y y$
 
@@ -54,3 +46,5 @@ nmap Q :bd<CR>
 " VimDev
 nmap <leader>vr :so ~/.vimrc<CR>
 
+nmap sj :SplitjoinSplit<cr>
+nmap sk :SplitjoinJoin<cr>

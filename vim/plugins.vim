@@ -23,7 +23,6 @@ let s:ag_opts = '-SU -i --hidden --depth 30 --nocolor --nogroup '.
     \ '--ignore "*.sock" '.
     \ '--ignore "tmp" '.
     \ '--ignore "spec/fixtures/vcr_cassettes/**/*" '.
-    \ '--ignore "tcpdf" '.
     \ '--ignore "*.ttf" '.
     \ '--ignore "*.png" '.
     \ '--ignore "*.jpg" '.
@@ -74,8 +73,6 @@ call unite#custom#profile('default', 'context', {
   \   'direction': 'topleft',
   \   'no_auto_resize': 1,
   \   'prompt_direction': 'top',
-  \   'cursor_line_highlight': 'CursorLine',
-  \   'cursor_line_time': '0.5',
   \   'candidate_icon': '-',
   \   'marked_icon': '✓',
   \   'prompt' : '⮀ '
@@ -149,6 +146,3 @@ endfunction
 " Don't allow any default key-mappings.
 let g:tmux_navigator_no_mappings = 1
 
-" ---- Splitjoin settings ----
-nmap sj :SplitjoinSplit<cr>
-nmap sk :SplitjoinJoin<cr>
