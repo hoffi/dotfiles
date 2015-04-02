@@ -37,8 +37,14 @@ nmap vv :vnew<CR>
 nmap ss :new<CR>
 
 "Move back and forth through previous and next buffers with ,z and ,x
-nnoremap <silent> <leader>h :bp<CR>
-nnoremap <silent> <leader>l :bn<CR>
+function! JumpOverQuickfix(cmd)
+  execute a:cmd
+  if &buftype ==# 'quickfix'
+    execute a:cmd
+  endif
+endfunction
+nnoremap <silent> <leader>h :call JumpOverQuickfix(":bp")<CR>
+nnoremap <silent> <leader>l :call JumpOverQuickfix(":bn")<CR>
 
 " Use // to clear hlsearch
 map // :nohlsearch<CR>
