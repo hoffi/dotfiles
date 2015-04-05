@@ -45,6 +45,3 @@ nmap Q :bd<CR>
 
 " VimDev
 nmap <leader>vr :so ~/.vimrc<CR>
-
-nmap sj :SplitjoinSplit<cr>
-nmap sk :SplitjoinJoin<cr>

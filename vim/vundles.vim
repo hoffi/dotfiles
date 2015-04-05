@@ -48,7 +48,6 @@ Bundle "ervandew/supertab.git"
 " gcc command to comment out code
 Bundle "tomtom/tcomment_vim.git"
 Bundle "briandoll/change-inside-surroundings.vim.git"
-Bundle "AndrewRadev/splitjoin.vim"
 " Automatic closing of brackets, quotes, ...
 Bundle "Raimondi/delimitMate"
 
