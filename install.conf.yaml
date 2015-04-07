@@ -13,6 +13,7 @@
     ~/.gitconfig: git/config
     ~/.gitignore_global: git/ignore
     ~/.gemrc: gemrc
+    ~/.inputrc: inputrc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
