@@ -4,19 +4,17 @@
 set backspace=indent,eol,start
 set history=500        " keep 500 lines of command line history
 set number             " line numbers
-set noruler            " show the cursor position all the time
 set showcmd            " display incomplete commands
 set incsearch          " do incremental searching
 set linebreak          " wrap lines on 'word' boundaries
 set scrolloff=2        " don't let the cursor touch the edge of the viewport
 set splitright         " Vertical splits use right half of screen
-set timeoutlen=500     " Lower ^[ timeout
-set ttimeoutlen=50
+set timeoutlen=700     " Lower ^[ timeout
+set ttimeoutlen=100
 set laststatus=2
+set noshowmode
 set tildeop            " use ~ to toggle case as an operator, not a motion
 set ttyfast            " Assume fast terminal
-set noshowmode
-set visualbell         " be quiet!
 set gdefault           " automatically overwrite all instances on s//
 set hidden
 set noswapfile nobackup nowb nospell
@@ -50,7 +48,6 @@ set smartindent
 set tabstop=2          " default to 2 spaces for a hard tab
 set softtabstop=2      " default to 2 spaces for the soft tab
 set shiftwidth=2       " for when <TAB> is pressed at the beginning of a line
-set list listchars=tab:\ \ ,extends:⟫,precedes:⟪,nbsp:.,trail:·
 autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
 
 " ================ Completion =======================
