@@ -12,15 +12,6 @@ highlight MatchParen   ctermfg=220  ctermbg=237
 highlight Visual       ctermbg=236
 
 " }}}
-" Statusline {{{
-hi StatusLine ctermfg=2 ctermbg=black
-hi StatusLineNC ctermfg=black ctermbg=239
-" Syntastic Warning
-hi User1 ctermfg=white ctermbg=red cterm=bold
-" File Flags
-hi User2 ctermfg=88 ctermbg=2 cterm=bold
-
-" }}}
 " Unite {{{
 highlight uniteInputPrompt            ctermfg=237
 highlight uniteCandidateMarker        ctermfg=143
