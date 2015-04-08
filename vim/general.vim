@@ -1,5 +1,5 @@
 " ######### GENERAL SETTINGS #############
-
+"
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set history=500        " keep 500 lines of command line history
@@ -9,6 +9,7 @@ set incsearch          " do incremental searching
 set linebreak          " wrap lines on 'word' boundaries
 set scrolloff=2        " don't let the cursor touch the edge of the viewport
 set splitright         " Vertical splits use right half of screen
+set timeout
 set timeoutlen=700     " Lower ^[ timeout
 set ttimeoutlen=100
 set laststatus=2

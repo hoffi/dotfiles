@@ -45,3 +45,6 @@ nmap Q :bd<CR>
 
 " VimDev
 nmap <leader>vr :so ~/.vimrc<CR>
+
+vnoremap < <gv
+vnoremap > >gv
