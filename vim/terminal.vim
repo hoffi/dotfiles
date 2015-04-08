@@ -49,14 +49,14 @@ if exists('$TMUX')
   " Recent versions of xterm (282 or above) also support
   " 5 -> blinking vertical bar
   " 6 -> solid vertical bar
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>[3 q\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>[0 q\<Esc>\\"
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>[4 q\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>[2 q\<Esc>\\"
   " }}}
 
 else
   set ttymouse=urxvt     " Set mouse terminal type
 
   " Cursor shape outside of tmux
-  let &t_SI = "\<Esc>[3 q"
-  let &t_EI = "\<Esc>[0 q"
+  let &t_SI = "\<Esc>[4 q"
+  let &t_EI = "\<Esc>[2 q"
 endif

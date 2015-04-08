@@ -35,6 +35,7 @@ Bundle "sheerun/vim-polyglot"
 Bundle "blueyed/vim-diminactive"
 " Shows buffers in the tabline
 Bundle "ap/vim-buftabline"
+Bundle "itchyny/lightline.vim"
 
 """ Ruby specific
 Bundle "vim-ruby/vim-ruby.git"
