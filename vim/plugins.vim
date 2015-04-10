@@ -1,4 +1,4 @@
-" PLUGIN SETTINGS
+                                                               " PLUGIN SETTINGS
 " ----- scrooloose/syntastic settings -----
 let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "▲"
@@ -132,7 +132,7 @@ let g:vimfiler_marked_file_icon = '✓'
 let g:vimfiler_tree_opened_icon = "▼"
 let g:vimfiler_tree_closed_icon = "▷"
 
-noremap <silent> <leader>f :VimFilerExplorer -split -simple -winwidth=35 -find -buffer-name=split<CR>
+noremap <silent> <leader>f :VimFilerExplorer -split -simple -winwidth=35 -find -buffer-name=split -direction=botright<CR>
 noremap <silent> <leader>p :VimFiler -toggle -invisible -parent -buffer-name=normal<CR>
 
 " Remap mark line to x instead of Space
