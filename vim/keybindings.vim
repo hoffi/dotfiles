@@ -6,11 +6,9 @@ noremap <silent> Y y$
 nnoremap <leader>w :w<CR>
 
 " ---------- Run RSpec ------------
-nmap <leader>s :Dispatch zeus rspec %<CR>
-function! RspecCurrentLine()
-  execute ":Dispatch zeus rspec %:" . line('.')
-endfunction
-nmap <leader>sl :call RspecCurrentLine()<CR>
+nmap <leader>s :VroomRunTestFile<CR>
+nmap <leader>sl :VroomRunNearestTest<CR>
+nmap <leader>sr :VroomRunLastTest<CR>
 
 " remap jj to escape for easier times
 inoremap jj <ESC>

@@ -14,7 +14,7 @@ let g:quickrun_config["watchdogs_checker/rubocop_2"] = {
 
 let g:quickrun_config["ruby/watchdogs_checker"] = {
   \ "type" : "watchdogs_checker/rubocop_2",
-  \ "runner/vimproc/updatetime" : 100
+  \ "runner/vimproc/updatetime" : 50
   \}
 let g:quickrun_config["watchdogs_checker/_"] = {
   \ "hook/close_quickfix/enable_exit" : 1
@@ -176,4 +176,9 @@ endfunction
 " ---- vim-tmux-navigator settings ----
 " Don't allow any default key-mappings.
 let g:tmux_navigator_no_mappings = 1
+
+" ---- vim-vroom settings ----
+let g:vroom_map_keys = 0 " Don't map default keybindings
+let g:vroom_use_dispatch = 1 " Run Rspec with vim-dispatch plugin
+let g:vroom_use_zeus = 1 " Always use zeus when it is running!
 

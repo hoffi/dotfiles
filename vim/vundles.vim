@@ -50,6 +50,7 @@ Bundle "vim-ruby/vim-ruby.git"
 Bundle "tpope/vim-rails.git"
 " Puts end for if, for, do, def, etc...
 Bundle "tpope/vim-endwise.git"
+Bundle "hoffi/vim-vroom.git"
 
 """ Editing
 " Tab Autocomplete !
