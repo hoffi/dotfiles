@@ -1,12 +1,43 @@
-                                                               " PLUGIN SETTINGS
-" ----- scrooloose/syntastic settings -----
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = "▲"
+" PLUGIN SETTINGS
+" ------ watchdogs -------
+" let g:watchdogs_check_BufWritePost_enable = 1
+let g:watchdogs_check_BufWritePost_enables = {
+  \ "ruby" : 1
+  \ }
+"
+let g:quickrun_config = {}
+let g:quickrun_config["watchdogs_checker/rubocop_2"] = {
+  \ "command"   : "rubocop",
+  \ "exec"      : "%c %o -f e %s:p ",
+  \ "quickfix/errorformat" : "%f:%c:%l: C: %m",
+  \}
 
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_auto_jump = 0
-let g:syntastic_enable_signs = 1
-let g:syntastic_ruby_checkers = ['rubocop']
+let g:quickrun_config["ruby/watchdogs_checker"] = {
+  \ "type" : "watchdogs_checker/rubocop_2",
+  \ "runner/vimproc/updatetime" : 100
+  \}
+let g:quickrun_config["watchdogs_checker/_"] = {
+  \ "hook/close_quickfix/enable_exit" : 1
+  \ }
+
+call watchdogs#setup(g:quickrun_config)
+
+" LimeLight
+autocmd User GoyoEnter Limelight
+autocmd User GoyoLeave Limelight!
+
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+
+" Number of preceding/following paragraphs to include (default: 0)
+let g:limelight_paragraph_span = 1
 
 " ----- Shougo/unite.vim settings -----
 let g:unite_source_history_yank_enable = 1

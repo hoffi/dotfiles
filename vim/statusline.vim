@@ -1,5 +1,6 @@
 let g:lightline = {
       \ 'mode_map': { 'c': 'NORMAL' },
+      \ 'colorscheme': 'solarized',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'filename' ] ],
       \   'right': [ [ 'lineinfo' ], [ 'syntastic', 'fileencoding', 'filetype' ] ]

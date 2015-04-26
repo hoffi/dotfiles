@@ -23,12 +23,17 @@ Bundle "vim-scripts/matchit.zip"
 " Run Async commands with tmux
 Bundle "tpope/vim-dispatch.git"
 Bundle "christoomey/vim-tmux-navigator"
-" Syntax checkers
-Bundle "scrooloose/syntastic.git"
+" Syntax checker. Need async rubocop checks :)
+Bundle "osyo-manga/vim-watchdogs"
+Bundle "thinca/vim-quickrun"
+Bundle "osyo-manga/shabadou.vim"
+Bundle "jceb/vim-hier"
+Bundle "dannyob/quickfixstatus"
 
 """ Appearance
 " Theme
 Bundle "morhetz/gruvbox"
+Bundle "google/vim-colorscheme-primary"
 " Contains Syntax Highlighting for much languages
 Bundle "sheerun/vim-polyglot"
 " Dims inactive Splits
@@ -36,6 +41,9 @@ Bundle "blueyed/vim-diminactive"
 " Shows buffers in the tabline
 Bundle "ap/vim-buftabline"
 Bundle "itchyny/lightline.vim"
+" Distraction Free Writing
+Bundle "junegunn/goyo.vim"
+Bundle "junegunn/limelight.vim"
 
 """ Ruby specific
 Bundle "vim-ruby/vim-ruby.git"

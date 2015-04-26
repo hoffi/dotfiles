@@ -90,17 +90,6 @@ if &t_Co > 2 || has("gui_running")
   set t_Co=256
 endif
 
-" ----- Not-quite-general-but-don't-belong-anywhere-else Settings -------------
-augroup vimrc
-  " Clear the current autocmd group, in case we're re-sourcing the file
-  au!
-  " Jump to the last known cursor position when opening a file.
-  autocmd BufReadPost
-        \ if line("'\"") > 1 && line("'\"") <= line("$") |
-        \   exe "normal! g`\"" |
-        \ endif
-augroup END
-
 " ----- Convenience commands and cabbrev's ------------------------------------
 
 " Make these commonly mistyped commands still work

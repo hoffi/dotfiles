@@ -1,5 +1,5 @@
-set background=dark
-colorscheme gruvbox
+set background=light
+colorscheme primary
 
 " General GUI {{{
 " Whitespace
