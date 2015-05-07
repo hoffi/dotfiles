@@ -9,7 +9,7 @@ let g:quickrun_config = {}
 let g:quickrun_config["watchdogs_checker/rubocop_2"] = {
   \ "command"   : "rubocop",
   \ "exec"      : "%c %o -f e %s:p ",
-  \ "quickfix/errorformat" : "%f:%c:%l: C: %m",
+  \ "quickfix/errorformat" : "%f:%l:%c: C: %m",
   \}
 
 let g:quickrun_config["ruby/watchdogs_checker"] = {
