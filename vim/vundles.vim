@@ -32,7 +32,7 @@ Bundle "dannyob/quickfixstatus"
 
 """ Appearance
 " Theme
-Bundle "morhetz/gruvbox"
+Bundle "nanotech/jellybeans.vim"
 Bundle "google/vim-colorscheme-primary"
 " Contains Syntax Highlighting for much languages
 Bundle "sheerun/vim-polyglot"

@@ -1,5 +1,5 @@
 set background=dark
-colorscheme gruvbox
+colorscheme jellybeans
 
 " General GUI {{{
 " Whitespace
