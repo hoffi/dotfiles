@@ -33,7 +33,6 @@ Bundle "dannyob/quickfixstatus"
 """ Appearance
 " Theme
 Bundle "nanotech/jellybeans.vim"
-Bundle "google/vim-colorscheme-primary"
 " Contains Syntax Highlighting for much languages
 Bundle "sheerun/vim-polyglot"
 " Dims inactive Splits
