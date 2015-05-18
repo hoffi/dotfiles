@@ -24,9 +24,10 @@ set magic              " Turn magic on for regex
 set synmaxcol=200      " Don't syntax highlight long lines
 set diffopt=filler,iwhite
 set shortmess=aoOT     " Short messages
-set fillchars=vert:\ ,fold:─
+set fillchars=vert:\|,fold:─
 set t_ut=              " No Background Redraw. (fixes broken background in tmux)
 set autoread           " Auto reload changed files
+set clipboard=unnamedplus " Share system clipboard
 if exists('&breakindent')
   set breakindent      " Indent wrapped lines up to the same level
   set wrap
@@ -101,5 +102,3 @@ command! Q q
 
 " Force write readonly files using sudo
 command! WS w !sudo tee %
-" open help in a new tab
-cabbrev help tab help

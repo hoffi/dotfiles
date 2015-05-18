@@ -29,6 +29,8 @@ Bundle "thinca/vim-quickrun"
 Bundle "osyo-manga/shabadou.vim"
 Bundle "jceb/vim-hier"
 Bundle "dannyob/quickfixstatus"
+Bundle "tpope/vim-fugitive"
+Bundle "gregsexton/gitv"
 
 """ Appearance
 " Theme
@@ -37,9 +39,7 @@ Bundle "nanotech/jellybeans.vim"
 Bundle "sheerun/vim-polyglot"
 " Dims inactive Splits
 Bundle "blueyed/vim-diminactive"
-" Shows buffers in the tabline
-Bundle "ap/vim-buftabline"
-Bundle "itchyny/lightline.vim"
+Bundle "bling/vim-airline"
 " Distraction Free Writing
 Bundle "junegunn/goyo.vim"
 Bundle "junegunn/limelight.vim"
