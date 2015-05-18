@@ -27,7 +27,7 @@ set shortmess=aoOT     " Short messages
 set fillchars=vert:\|,fold:─
 set t_ut=              " No Background Redraw. (fixes broken background in tmux)
 set autoread           " Auto reload changed files
-set clipboard=unnamedplus " Share system clipboard
+set clipboard=unnamed  " Share system clipboard
 if exists('&breakindent')
   set breakindent      " Indent wrapped lines up to the same level
   set wrap

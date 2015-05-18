@@ -118,6 +118,12 @@ call unite#custom#profile('source/history/yank', 'context', {
   \ 'start_insert': 0
   \ })
 
+call unite#custom#profile('source/giti/status', 'context', {
+  \   'start_insert': 0,
+  \   'keep_focus': 1,
+  \   'no_quit': 1
+  \ })
+
 call unite#custom#profile('source/outline', 'context', {
   \   'vertical': 1,
   \   'direction': 'botright',
@@ -145,6 +151,7 @@ call unite#filters#sorter_default#use(['sorter_selecta'])
 nnoremap <silent> fr   :<C-u>UniteResume -no-start-insert -force-redraw<CR>
 nnoremap <silent> ff   :<C-u>Unite file_rec/async<CR>
 nnoremap <silent> fg   :<C-u>Unite grep:. -no-wrap<CR>
+nnoremap <silent> fs   :<C-u>Unite giti/status<CR>
 nnoremap <silent> fe   :<C-u>Unite register<CR>
 nnoremap <silent> fh   :<C-u>Unite history/yank<CR>
 nnoremap <silent> fo   :<C-u>Unite outline<CR>
