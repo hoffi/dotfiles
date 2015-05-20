@@ -67,10 +67,9 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 
-" Textwidth and Cursor Line
+" Textwidth
 set cc=81
 set textwidth=80
-set cursorline
 
 " --- Abbreviations ----
 iab pry! require 'pry'; binding.pry
