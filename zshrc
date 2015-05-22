@@ -14,6 +14,8 @@ if [[ $(uname) == "Darwin" ]]; then
   alias vim="mvim -v"
 fi
 
+bindkey -e
+
 # Aliases
 alias cl="clear"
 alias rm='nocorrect rm' # No prompt on deleting
