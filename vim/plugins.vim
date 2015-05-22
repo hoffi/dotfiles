@@ -124,15 +124,6 @@ call unite#custom#profile('source/giti/status', 'context', {
   \   'no_quit': 1
   \ })
 
-call unite#custom#profile('source/outline', 'context', {
-  \   'vertical': 1,
-  \   'direction': 'botright',
-  \   'no_focus': 1,
-  \   'start_insert': 0,
-  \   'keep_focus': 1,
-  \   'no_quit': 1,
-  \ })
-
 call unite#custom#profile('source/grep', 'context', {
   \   'silent': 1,
   \   'vertical_preview': 1,
@@ -158,7 +149,7 @@ nnoremap <silent> fma  :<C-u>Unite mapping -silent<CR>
 nnoremap <silent> <Leader>b  :<C-u>Unite buffer<CR>
 nnoremap <silent> <Leader>ta :<C-u>Unite tab<CR>
 " Open Unite with word under cursor or selection
-nnoremap <silent> K :UniteWithCursorWord grep:. -profile-name=navigate<CR>
+nnoremap <silent> K :UniteWithCursorWord grep:. -no-wrap<CR>
 
 " ----- Shougo/vimfiler settings -----
 let g:vimfiler_as_default_explorer = 1
