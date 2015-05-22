@@ -62,7 +62,6 @@ Bundle "Raimondi/delimitMate"
 
 """ Project
 Bundle "Shougo/unite.vim"
-Bundle "Shougo/unite-outline.git"
 " File Browser
 Bundle "Shougo/vimfiler"
 Bundle "kmnk/vim-unite-giti.git"

@@ -154,7 +154,6 @@ nnoremap <silent> fg   :<C-u>Unite grep:. -no-wrap<CR>
 nnoremap <silent> fs   :<C-u>Unite giti/status<CR>
 nnoremap <silent> fe   :<C-u>Unite register<CR>
 nnoremap <silent> fh   :<C-u>Unite history/yank<CR>
-nnoremap <silent> fo   :<C-u>Unite outline<CR>
 nnoremap <silent> fma  :<C-u>Unite mapping -silent<CR>
 nnoremap <silent> <Leader>b  :<C-u>Unite buffer<CR>
 nnoremap <silent> <Leader>ta :<C-u>Unite tab<CR>
