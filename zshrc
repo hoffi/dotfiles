@@ -14,6 +14,11 @@ if [[ $(uname) == "Darwin" ]]; then
   alias vim="mvim -v"
 fi
 
+nodename=$(uname -n)
+if [[ -s "${ZDOTDIR:-$HOME}/.dotfiles/client_settings/${nodename}.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.dotfiles/client_settings/${nodename}.zsh"
+fi
+
 bindkey -e
 
 # Aliases
