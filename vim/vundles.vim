@@ -34,7 +34,7 @@ Bundle "gregsexton/gitv"
 
 """ Appearance
 " Theme
-Bundle "nanotech/jellybeans.vim"
+Bundle "NLKNguyen/papercolor-theme"
 " Contains Syntax Highlighting for much languages
 Bundle "sheerun/vim-polyglot"
 " Dims inactive Splits
@@ -65,6 +65,7 @@ Bundle "Shougo/unite.vim"
 " File Browser
 Bundle "Shougo/vimfiler"
 Bundle "kmnk/vim-unite-giti.git"
+Bundle "editorconfig/editorconfig-vim"
 
 " -------------------
 

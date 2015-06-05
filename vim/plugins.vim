@@ -2,7 +2,8 @@
 " ------ watchdogs -------
 " let g:watchdogs_check_BufWritePost_enable = 1
 let g:watchdogs_check_BufWritePost_enables = {
-  \ "ruby" : 1
+  \ "ruby" : 1,
+  \ "javascript" : 1
   \ }
 "
 let g:quickrun_config = {}
@@ -15,6 +16,10 @@ let g:quickrun_config["watchdogs_checker/rubocop_2"] = {
 let g:quickrun_config["ruby/watchdogs_checker"] = {
   \ "type" : "watchdogs_checker/rubocop_2",
   \ "runner/vimproc/updatetime" : 50
+  \}
+let g:quickrun_config["javascript/watchdogs_checker"] = {
+  \ "type" : "watchdogs_checker/jshint",
+  \ "runner/vimproc/updatetime" : 10
   \}
 let g:quickrun_config["watchdogs_checker/_"] = {
   \ "hook/close_quickfix/enable_exit" : 1

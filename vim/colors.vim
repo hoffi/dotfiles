@@ -1,2 +1,2 @@
-set background=dark
-colorscheme jellybeans
+set background=light
+colorscheme PaperColor
