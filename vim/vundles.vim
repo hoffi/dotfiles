@@ -62,6 +62,7 @@ Bundle "Raimondi/delimitMate"
 
 """ Project
 Bundle "kien/ctrlp.vim"
+Bundle "JazzCore/ctrlp-cmatcher"
 Bundle "Shougo/unite.vim"
 " File Browser
 Bundle "Shougo/vimfiler"

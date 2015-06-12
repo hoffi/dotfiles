@@ -68,6 +68,7 @@ let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_user_command = 'ag %s ' . s:ag_opts . ' -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_match_func = {'match': 'matcher#cmatch'}
 
 nnoremap <silent> fr   :<C-u>UniteResume -no-start-insert -force-redraw<CR>
 nnoremap <silent> fg   :<C-u>Unite grep:. -no-wrap<CR>
