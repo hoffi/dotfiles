@@ -61,10 +61,11 @@ Bundle "briandoll/change-inside-surroundings.vim.git"
 Bundle "Raimondi/delimitMate"
 
 """ Project
+Bundle "kien/ctrlp.vim"
 Bundle "Shougo/unite.vim"
 " File Browser
 Bundle "Shougo/vimfiler"
-Bundle "kmnk/vim-unite-giti.git"
+" Bundle "kmnk/vim-unite-giti.git"
 Bundle "editorconfig/editorconfig-vim"
 
 " -------------------

@@ -44,11 +44,8 @@ let g:limelight_default_coefficient = 0.7
 " Number of preceding/following paragraphs to include (default: 0)
 let g:limelight_paragraph_span = 1
 
-" ----- Shougo/unite.vim settings -----
-let g:unite_source_history_yank_enable = 1
-
-let s:ag_opts = '-SU -i --hidden --depth 30 --nocolor --nogroup '.
-    \ '--ignore ".git" '.
+" ag Options
+let s:ag_opts = '-i --follow --hidden --column --depth 30 --nocolor --nogroup '.
     \ '--ignore "bower_modules" '.
     \ '--ignore "node_modules" '.
     \ '--ignore "apps/*/cache/*" '.
@@ -64,90 +61,16 @@ let s:ag_opts = '-SU -i --hidden --depth 30 --nocolor --nogroup '.
     \ '--ignore "*.jpg" '.
     \ '--ignore "*.gif"'
 
-let g:unite_source_rec_async_command = 'ag --follow '.s:ag_opts.' -g ""'
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_grep_default_opts = '--line-numbers '.s:ag_opts
-let g:unite_source_grep_recursive_opt = ''
-
-let g:unite_source_rec_unit = 3000
-let g:unite_source_rec_min_cache_files = 400
-let g:unite_source_rec_max_cache_files = 23000
-
-let g:unite_source_grep_max_candidates = 400
-
-" Unite keybindings
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  let b:SuperTabDisabled=1
-  silent! nunmap <buffer> <C-h>
-  silent! nunmap <buffer> <C-k>
-  silent! nunmap <buffer> <C-l>
-  silent! nunmap <buffer> <C-r>
-  nmap <silent><buffer> <C-r> <Plug>(unite_redraw)
-  imap <silent><buffer> <C-j> <Plug>(unite_select_next_line)
-  imap <silent><buffer> <C-k> <Plug>(unite_select_previous_line)
-  nmap <buffer> <ESC>              <Plug>(unite_exit)
-  imap <buffer> jj                 <Plug>(unite_insert_leave)
-  imap <buffer> <Tab>              <Plug>(unite_complete)
-  nmap <buffer> <C-z>              <Plug>(unite_toggle_transpose_window)
-  imap <buffer> <C-z>              <Plug>(unite_toggle_transpose_window)
-  imap <buffer> <C-w>              <Plug>(unite_delete_backward_path)
-  nnoremap <silent><buffer><expr> r unite#do_action('rename')
-endfunction
-
-" Global default context
-call unite#custom#profile('default', 'context', {
-  \   'safe': 0,
-  \   'auto_expand': 1,
-  \   'start_insert': 1,
-  \   'smartcase': 1,
-  \   'max_candidates': 0,
-  \   'short_source_names': 1,
-  \   'update_time': 500,
-  \   'winheight': 15,
-  \   'winwidth': 40,
-  \   'direction': 'topleft',
-  \   'no_auto_resize': 1,
-  \   'prompt_direction': 'top',
-  \   'candidate_icon': '-',
-  \   'marked_icon': '✓',
-  \   'prompt' : '⮀ '
-  \ })
-
-call unite#custom#profile('action', 'context', {
-  \   'start_insert': 1
-  \ })
-
-" Conveniently set settings globally per-source
-call unite#custom#profile('source/history/yank', 'context', {
-  \ 'start_insert': 0
-  \ })
-
-call unite#custom#profile('source/giti/status', 'context', {
-  \   'start_insert': 0,
-  \   'keep_focus': 1,
-  \   'no_quit': 1
-  \ })
-
-call unite#custom#profile('source/grep', 'context', {
-  \   'silent': 1,
-  \   'vertical_preview': 1,
-  \   'start_insert': 0,
-  \   'keep_focus': 1,
-  \   'no_quit': 1,
-  \ })
-
-" Filters
-call unite#custom#source(
-      \ 'file_rec,file_rec/async,file_rec', 'converters',
-      \ ['converter_file_directory'])
-call unite#filters#matcher_default#use(['matcher_glob', 'matcher_context'])
-call unite#filters#sorter_default#use(['sorter_selecta'])
+" CtrlP
+let g:ctrlp_map = 'ff'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ar'
+let g:ctrlp_user_command = 'ag %s ' . s:ag_opts . ' -g ""'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_follow_symlinks = 1
 
 nnoremap <silent> fr   :<C-u>UniteResume -no-start-insert -force-redraw<CR>
-nnoremap <silent> ff   :<C-u>Unite file_rec/async<CR>
 nnoremap <silent> fg   :<C-u>Unite grep:. -no-wrap<CR>
-nnoremap <silent> fs   :<C-u>Unite giti/status<CR>
 nnoremap <silent> fe   :<C-u>Unite register<CR>
 nnoremap <silent> fh   :<C-u>Unite history/yank<CR>
 nnoremap <silent> fma  :<C-u>Unite mapping -silent<CR>

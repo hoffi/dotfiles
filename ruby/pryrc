@@ -1,0 +1,7 @@
+require 'rubygems'
+require '~/.irb/gem_loader'
+require '~/.irb/pry_loader'
+require '~/.irb/custom' if File.exists?("#{Dir.home}/.irb/irb/custom.rb")
+require '~/.irb/awesome_print_loader'
+require '~/.irb/rails_colors'
+require '~/.irb/rails_commands'

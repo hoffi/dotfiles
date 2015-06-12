@@ -14,6 +14,9 @@
     ~/.gitignore_global: git/ignore
     ~/.gemrc: gemrc
     ~/.inputrc: inputrc
+    ~/.irbrc: ruby/irbrc
+    ~/.pryrc: ruby/pryrc
+    ~/.irb: ruby/irb/
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
