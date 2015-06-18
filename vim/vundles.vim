@@ -49,7 +49,6 @@ Bundle "tomtom/tcomment_vim.git"
 Bundle "briandoll/change-inside-surroundings.vim.git"
 " Automatic closing of brackets, quotes, ...
 Bundle "Raimondi/delimitMate"
-Bundle "editorconfig/editorconfig-vim"
 
 """ Project
 Bundle "scrooloose/syntastic"

@@ -2,7 +2,9 @@ map <Esc>[27;5;9~ <C-Tab>
 map <Esc>[27;6;9~ <C-S-Tab>
 
 if exists('$TMUX')
-  set ttymouse=sgr
+  if !has('nvim')
+    set ttymouse=sgr
+  end
 
   " Assigns some xterm(1)-style keys to escape sequences passed by tmux {{{
   " when "xterm-keys" is set to "on".  Inspired by an example given by
@@ -54,7 +56,9 @@ if exists('$TMUX')
   " }}}
 
 else
-  set ttymouse=urxvt     " Set mouse terminal type
+  if !has('nvim')
+    set ttymouse=urxvt     " Set mouse terminal type
+  end
 
   " Cursor shape outside of tmux
   let &t_SI = "\<Esc>[6 q"
