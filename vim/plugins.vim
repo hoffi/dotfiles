@@ -23,7 +23,7 @@ let g:limelight_default_coefficient = 0.7
 let g:limelight_paragraph_span = 1
 
 " ag Options
-let s:ag_opts = '-i --follow --hidden --column --depth 30 --nocolor --nogroup '.
+let s:ag_opts = '-i --vimgrep --follow --hidden --column --depth 30 --nocolor --nogroup '.
     \ '--ignore "bower_modules" '.
     \ '--ignore "node_modules" '.
     \ '--ignore "apps/*/cache/*" '.
@@ -40,7 +40,6 @@ let s:ag_opts = '-i --follow --hidden --column --depth 30 --nocolor --nogroup '.
     \ '--ignore "*.gif"'
 
 " CtrlP
-let g:ctrlp_map = ' p'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_user_command = 'ag %s ' . s:ag_opts . ' -g ""'
@@ -48,12 +47,13 @@ let g:ctrlp_use_caching = 0
 let g:ctrlp_follow_symlinks = 1
 let g:ctrlp_match_func = {'match': 'matcher#cmatch'}
 
-nnoremap <silent> fg   :<C-u>Unite grep:. -no-wrap -no-quit<CR>
-nnoremap <silent> fh   :<C-u>Unite history/yank<CR>
-nnoremap <silent> fma  :<C-u>Unite mapping -silent<CR>
-nnoremap <silent> <Leader>b  :<C-u>Unite buffer<CR>
-" Open Unite with word under cursor or selection
-nnoremap <silent> K :UniteWithCursorWord grep:. -no-wrap<CR>
+" ----- Ag settings -----
+let g:agprg="ag " . s:ag_opts
+function! s:SearchCurrentWord(word)
+  :Ag l:word
+endfunction
+nmap <leader>g :LAg ""<left>
+nnoremap K :LAg "<C-R><C-W>"<CR>
 
 " ----- Shougo/vimfiler settings -----
 let g:vimfiler_as_default_explorer = 1

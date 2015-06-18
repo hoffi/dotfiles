@@ -17,22 +17,18 @@ call vundle#rc()
 
 """ General
 Bundle "gmarik/vundle"
-Bundle "Shougo/vimproc.vim"
 " Enables % keybinding for many languages
 Bundle "vim-scripts/matchit.zip"
 " Run Async commands with tmux
 Bundle "tpope/vim-dispatch.git"
 Bundle "christoomey/vim-tmux-navigator"
 Bundle "tpope/vim-fugitive"
-Bundle "gregsexton/gitv"
 
 """ Appearance
 " Theme
 Bundle "fabi1cazenave/kalahari.vim"
 " Contains Syntax Highlighting for much languages
 Bundle "sheerun/vim-polyglot"
-" Dims inactive Splits
-Bundle "blueyed/vim-diminactive"
 Bundle "bling/vim-airline"
 " Distraction Free Writing
 Bundle "junegunn/goyo.vim"
@@ -43,7 +39,7 @@ Bundle "vim-ruby/vim-ruby.git"
 Bundle "tpope/vim-rails.git"
 " Puts end for if, for, do, def, etc...
 Bundle "tpope/vim-endwise.git"
-Bundle "hoffi/vim-vroom.git"
+Bundle "skalnik/vim-vroom.git"
 
 """ Editing
 " Tab Autocomplete !
@@ -60,9 +56,9 @@ Bundle "scrooloose/syntastic"
 Bundle "kien/ctrlp.vim"
 Bundle "JazzCore/ctrlp-cmatcher"
 Bundle "Shougo/unite.vim"
+Bundle "rking/ag.vim"
 " File Browser
 Bundle "Shougo/vimfiler"
-" Bundle "kmnk/vim-unite-giti.git"
 
 " -------------------
 

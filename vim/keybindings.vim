@@ -26,23 +26,19 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nmap vv :vnew<CR>
 nmap ss :new<CR>
 
-"Move back and forth through previous and next buffers with ,z and ,x
-function! JumpOverQuickfix(cmd)
-  execute a:cmd
-  if &buftype ==# 'quickfix'
-    execute a:cmd
-  endif
-endfunction
-nnoremap <silent> <leader>h :call JumpOverQuickfix(":bp")<CR>
-nnoremap <silent> <leader>l :call JumpOverQuickfix(":bn")<CR>
+"Move back and forth through previous and next buffers with h and l
+nnoremap <silent> <leader>h :bp<CR>
+nnoremap <silent> <leader>l :bn<CR>
 
 " Use // to clear hlsearch
 map // :nohlsearch<CR>
 
+" Close buffer
 nmap Q :bd<CR>
 
 " VimDev
 nmap <leader>vr :so ~/.vimrc<CR>
 
+" Keep selection after indenting
 vnoremap < <gv
 vnoremap > >gv
