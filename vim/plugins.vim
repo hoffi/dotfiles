@@ -23,7 +23,7 @@ let g:limelight_default_coefficient = 0.7
 let g:limelight_paragraph_span = 1
 
 " ag Options
-let s:ag_opts = '-i --vimgrep --follow --hidden --column --depth 30 --nocolor --nogroup '.
+let s:ag_opts = '-i --follow --hidden --column --depth 30 --nocolor --nogroup '.
     \ '--ignore "bower_modules" '.
     \ '--ignore "node_modules" '.
     \ '--ignore "apps/*/cache/*" '.
@@ -34,6 +34,7 @@ let s:ag_opts = '-i --vimgrep --follow --hidden --column --depth 30 --nocolor --
     \ '--ignore "*.sock" '.
     \ '--ignore "tmp" '.
     \ '--ignore "spec/fixtures/vcr_cassettes/**/*" '.
+    \ '--ignore ".git/**/*" '.
     \ '--ignore "*.ttf" '.
     \ '--ignore "*.png" '.
     \ '--ignore "*.jpg" '.
@@ -54,8 +55,8 @@ let g:agprg="ag " . s:ag_opts
 function! s:SearchCurrentWord(word)
   :Ag l:word
 endfunction
-nmap <leader>g :LAg ""<left>
-nnoremap K :LAg "<C-R><C-W>"<CR>
+nmap <leader>g :LAg! ""<left>
+nnoremap K :LAg! "<C-R><C-W>"<CR>
 
 " ----- Shougo/vimfiler settings -----
 let g:vimfiler_as_default_explorer = 1
