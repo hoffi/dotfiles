@@ -41,6 +41,18 @@ let s:ag_opts = '-i --follow --hidden --column --depth 30 --nocolor --nogroup '.
     \ '--ignore "*.gif"'
 
 " CtrlP
+" ignore space key in CtrlP
+let g:ctrlp_abbrev = {
+    \ 'gmode': 'itk',
+    \ 'abbrevs': [
+        \ {
+        \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
+        \ 'expanded': '',
+        \ 'mode': '',
+        \ },
+        \ ]
+    \ }
+
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_user_command = 'ag %s ' . s:ag_opts . ' -g ""'
