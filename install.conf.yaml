@@ -17,6 +17,7 @@
     ~/.irbrc: ruby/irbrc
     ~/.pryrc: ruby/pryrc
     ~/.irb: ruby/irb/
+    ~/.spacemacs: spacemacs
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
