@@ -23,6 +23,8 @@ Bundle "vim-scripts/matchit.zip"
 Bundle "tpope/vim-dispatch.git"
 Bundle "christoomey/vim-tmux-navigator"
 Bundle "tpope/vim-fugitive"
+" Minimalist start screen
+Bundle 'mhinz/vim-startify'
 
 """ Appearance
 " Theme
@@ -49,6 +51,7 @@ Bundle "tomtom/tcomment_vim.git"
 Bundle "briandoll/change-inside-surroundings.vim.git"
 " Automatic closing of brackets, quotes, ...
 Bundle "Raimondi/delimitMate"
+Bundle "benmills/vimux"
 
 """ Project
 Bundle "scrooloose/syntastic"

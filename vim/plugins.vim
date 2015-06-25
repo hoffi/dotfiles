@@ -1,4 +1,44 @@
 " PLUGIN SETTINGS
+" ------ startify -------
+let g:startify_session_autoload = 0
+let g:startify_change_to_dir = 0
+let g:startify_change_to_vcs_root = 1
+let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
+let g:startify_list_order = ['bookmarks', 'dir', 'files']
+autocmd User Startified setlocal cursorline
+let g:ctrlp_reuse_window = 'startify'
+hi StartifyBracket ctermfg=240
+hi StartifyFile    ctermfg=147
+hi StartifyFooter  ctermfg=240
+hi StartifyHeader  ctermfg=114
+hi StartifyNumber  ctermfg=215
+hi StartifyPath    ctermfg=245
+hi StartifySlash   ctermfg=240
+hi StartifySpecial ctermfg=240
+
+" ------ vimux -------
+let VimuxUseNearest = 1
+" Prompt for a command to run in a tmux pane
+nmap <Leader>tc :wa<CR>:call OpenVimuxPrompt('v', '15')<CR>
+nmap <Leader>tvc :wa<CR>:call OpenVimuxPrompt('h', '40')<CR>
+function! OpenVimuxPrompt(orientation, size)
+  let g:VimuxOrientation=a:orientation
+  let g:VimuxHeight=a:size
+  execute 'VimuxPromptCommand'
+endfunction
+
+" Run last command executed by RunVimTmuxCommand
+nmap <Leader>tr :wa<CR>:VimuxRunLastCommand<CR>
+
+" Inspect runner pane
+nmap <Leader>ti :VimuxInspectRunner<CR>
+
+" Close all other tmux panes in current window
+nmap <Leader>tx :VimuxCloseRunner<CR>
+
+" Zoom runner pane
+nmap <Leader>tz :VimuxZoomRunner<CR>
+
 " ------ syntastic -------
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
