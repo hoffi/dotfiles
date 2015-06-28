@@ -1,2 +1,3 @@
 set background=dark
-colorscheme kalahari
+colorscheme pencil
+let g:airline_theme = 'pencil'

@@ -28,7 +28,7 @@ Bundle 'mhinz/vim-startify'
 
 """ Appearance
 " Theme
-Bundle "fabi1cazenave/kalahari.vim"
+Bundle "reedes/vim-colors-pencil"
 " Contains Syntax Highlighting for much languages
 Bundle "sheerun/vim-polyglot"
 Bundle "bling/vim-airline"
