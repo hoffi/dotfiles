@@ -56,7 +56,6 @@ Bundle "benmills/vimux"
 """ Project
 Bundle "scrooloose/syntastic"
 Bundle "kien/ctrlp.vim"
-Bundle "JazzCore/ctrlp-cmatcher"
 Bundle "Shougo/unite.vim"
 Bundle "rking/ag.vim"
 " File Browser
