@@ -8,8 +8,8 @@ set nocompatible
 source ~/.vim/general.vim
 source ~/.vim/statusline.vim
 source ~/.vim/terminal.vim
-source ~/.vim/vundles.vim
 source ~/.vim/plugins.vim
+source ~/.vim/plugin_settings.vim
 source ~/.vim/colors.vim
 source ~/.vim/keybindings.vim
 
