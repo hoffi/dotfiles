@@ -79,3 +79,5 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
