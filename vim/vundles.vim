@@ -54,7 +54,12 @@ Bundle "Raimondi/delimitMate"
 Bundle "benmills/vimux"
 
 """ Project
-Bundle "scrooloose/syntastic"
+if has('nvim')
+  Bundle "benekastah/neomake"
+endif
+if !has('nvim')
+  Bundle "scrooloose/syntastic"
+endif
 Bundle "kien/ctrlp.vim"
 Bundle "Shougo/unite.vim"
 Bundle "rking/ag.vim"

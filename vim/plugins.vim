@@ -40,10 +40,15 @@ nmap <Leader>tx :VimuxCloseRunner<CR>
 nmap <Leader>tz :VimuxZoomRunner<CR>
 
 " ------ syntastic -------
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+if !has('nvim')
+  let g:syntastic_auto_loc_list = 0
+  let g:syntastic_check_on_open = 0
+  let g:syntastic_check_on_wq = 1
+  let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+endif
+if has('nvim')
+  autocmd! BufWritePost * Neomake
+endif
 
 " LimeLight
 autocmd User GoyoEnter Limelight
@@ -74,10 +79,11 @@ let s:ag_opts = '-i --follow --hidden --column --depth 30 --nocolor --nogroup '.
     \ '--ignore "*.sock" '.
     \ '--ignore "tmp" '.
     \ '--ignore "spec/fixtures/vcr_cassettes/**/*" '.
-    \ '--ignore ".git/**/*" '.
+    \ '--ignore ".git" '.
     \ '--ignore "*.ttf" '.
     \ '--ignore "*.png" '.
     \ '--ignore "*.jpg" '.
+    \ '--ignore ".DS_Store" '.
     \ '--ignore "*.gif"'
 
 " CtrlP
@@ -98,9 +104,6 @@ let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_user_command = 'ag %s ' . s:ag_opts . ' -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_follow_symlinks = 1
-if !has("nvim")
-  let g:ctrlp_match_func = {'match': 'matcher#cmatch'}
-end
 
 " ----- Ag settings -----
 let g:agprg="ag " . s:ag_opts
