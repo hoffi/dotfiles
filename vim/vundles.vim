@@ -1,72 +1,50 @@
-" ========================================
-" Vim plugin configuration
-" ========================================
-"
-" This file contains the list of plugin installed using vundle plugin manager.
-" Once you've updated the list of plugin, you can run vundle update by issuing
-" the command :BundleInstall from within vim or directly invoking it from the
-" command line with the following syntax:
-" vim --noplugin -u vim/vundles.vim -N "+set hidden" "+syntax on" +BundleClean! +BundleInstall +qall
-" Filetype off is required by vundle
-filetype off
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" ----- VUNDLES -----
-
+call plug#begin()
 """ General
-Bundle "gmarik/vundle"
 " Enables % keybinding for many languages
-Bundle "vim-scripts/matchit.zip"
+Plug 'vim-scripts/matchit.zip'
 " Run Async commands with tmux
-Bundle "tpope/vim-dispatch.git"
-Bundle "christoomey/vim-tmux-navigator"
-Bundle "tpope/vim-fugitive"
+Plug 'tpope/vim-dispatch', { 'on': 'Dispatch' }
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-fugitive'
 " Minimalist start screen
-Bundle 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 
 """ Appearance
 " Theme
-Bundle "reedes/vim-colors-pencil"
+Plug 'reedes/vim-colors-pencil'
 " Contains Syntax Highlighting for much languages
-Bundle "sheerun/vim-polyglot"
-Bundle "bling/vim-airline"
+Plug 'sheerun/vim-polyglot'
+Plug 'bling/vim-airline'
 " Distraction Free Writing
-Bundle "junegunn/goyo.vim"
-Bundle "junegunn/limelight.vim"
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
 
 """ Ruby specific
-Bundle "vim-ruby/vim-ruby.git"
-Bundle "tpope/vim-rails.git"
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
 " Puts end for if, for, do, def, etc...
-Bundle "tpope/vim-endwise.git"
-Bundle "skalnik/vim-vroom.git"
+Plug 'tpope/vim-endwise'
+Plug 'skalnik/vim-vroom', { 'on': ['VroomRunLastTest', 'VroomRunNearestTest', 'VroomRunTestFile'] }
 
 """ Editing
 " Tab Autocomplete !
-Bundle "ervandew/supertab.git"
+Plug 'ervandew/supertab'
 " gcc command to comment out code
-Bundle "tomtom/tcomment_vim.git"
-Bundle "briandoll/change-inside-surroundings.vim.git"
+Plug 'tomtom/tcomment_vim'
+Plug 'briandoll/change-inside-surroundings.vim'
 " Automatic closing of brackets, quotes, ...
-Bundle "Raimondi/delimitMate"
-Bundle "benmills/vimux"
+Plug 'Raimondi/delimitMate'
+Plug 'benmills/vimux'
 
 """ Project
 if has('nvim')
-  Bundle "benekastah/neomake"
+  Plug 'benekastah/neomake'
+else
+  Plug 'scrooloose/syntastic'
 endif
-if !has('nvim')
-  Bundle "scrooloose/syntastic"
-endif
-Bundle "kien/ctrlp.vim"
-Bundle "Shougo/unite.vim"
-Bundle "rking/ag.vim"
+
+Plug 'kien/ctrlp.vim'
+Plug 'Shougo/unite.vim'
+Plug 'rking/ag.vim'
 " File Browser
-Bundle "Shougo/vimfiler"
-
-" -------------------
-
-"Filetype plugin indent on is required by vundle
-filetype plugin indent on
+Plug 'Shougo/vimfiler'
+call plug#end()

@@ -39,15 +39,14 @@ nmap <Leader>tx :VimuxCloseRunner<CR>
 " Zoom runner pane
 nmap <Leader>tz :VimuxZoomRunner<CR>
 
-" ------ syntastic -------
-if !has('nvim')
+" ------ syntastic and neomake -------
+if has('nvim')
+  autocmd! BufWritePost * Neomake
+else
   let g:syntastic_auto_loc_list = 0
   let g:syntastic_check_on_open = 0
   let g:syntastic_check_on_wq = 1
   let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-endif
-if has('nvim')
-  autocmd! BufWritePost * Neomake
 endif
 
 " LimeLight
