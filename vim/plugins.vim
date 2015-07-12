@@ -12,7 +12,7 @@ Plug 'mhinz/vim-startify'
 
 """ Appearance
 " Theme
-Plug 'reedes/vim-colors-pencil'
+Plug 'NLKNguyen/papercolor-theme'
 " Contains Syntax Highlighting for much languages
 Plug 'sheerun/vim-polyglot'
 Plug 'bling/vim-airline'

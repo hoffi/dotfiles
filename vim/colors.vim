@@ -1,3 +1,3 @@
 set background=dark
-colorscheme pencil
-let g:airline_theme = 'pencil'
+colorscheme PaperColor-Dark
+let g:airline_theme = 'PaperColor'
