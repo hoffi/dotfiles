@@ -5,22 +5,8 @@ noremap <silent> Y y$
 " Map <leader>w to save
 nnoremap <leader>w :w<CR>
 
-" ---------- Run RSpec ------------
-nmap <leader>s :VroomRunTestFile<CR>
-nmap <leader>sl :VroomRunNearestTest<CR>
-nmap <leader>sr :VroomRunLastTest<CR>
-
-" remap jj to escape for easier times
-inoremap jj <ESC>
-
 " remap 0 to first non-empty character
 map 0 ^
-
-" Re-enable tmux_navigator.vim default bindings
-nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
 " Create splits
 nmap vv :vnew<CR>
@@ -34,11 +20,11 @@ nnoremap <silent> <leader>l :bn<CR>
 map // :nohlsearch<CR>
 
 " Close buffer
-nmap Q :bd<CR>
-
-" VimDev
-nmap <leader>vr :so ~/.vimrc<CR>
+nmap Q :Bdelete<CR>
+nmap QQ :Bdelete!<CR>
 
 " Keep selection after indenting
 vnoremap < <gv
 vnoremap > >gv
+
+nmap <leader>n :call splittednerdtree#revealFile()<CR>

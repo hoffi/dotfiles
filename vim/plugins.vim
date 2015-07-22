@@ -2,13 +2,11 @@ call plug#begin()
 
 """ General
 " Enables % keybinding for many languages
-Plug 'vim-scripts/matchit.zip'
+runtime! macros/matchit.vim
 " Run Async commands with tmux
 Plug 'tpope/vim-dispatch'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
-" Minimalist start screen
-Plug 'mhinz/vim-startify'
 
 """ Appearance
 " Theme
@@ -23,6 +21,7 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
+Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 
 """ Editing
 " Puts end for if, for, do, def, etc...
@@ -35,6 +34,7 @@ Plug 'briandoll/change-inside-surroundings.vim'
 " Automatic closing of brackets, quotes, ...
 Plug 'Raimondi/delimitMate'
 Plug 'benmills/vimux'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 """ Project
 if has('nvim')
@@ -44,9 +44,9 @@ else
 endif
 Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky', { 'on': 'CtrlPFunky' }
-Plug 'Shougo/unite.vim'
 Plug 'rking/ag.vim'
 " File Browser
-Plug 'Shougo/vimfiler'
+Plug 'scrooloose/nerdtree'
+Plug 'svenwin/vim-splitted-nerdtree'
 
 call plug#end()

@@ -2,7 +2,6 @@
 "
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-set history=500        " keep 500 lines of command line history
 set number             " line numbers
 set showcmd            " display incomplete commands
 set incsearch          " do incremental searching
@@ -10,11 +9,9 @@ set linebreak          " wrap lines on 'word' boundaries
 set scrolloff=2        " don't let the cursor touch the edge of the viewport
 set splitright         " Vertical splits use right half of screen
 set timeout
-set timeoutlen=700     " Lower ^[ timeout
+set timeoutlen=300     " Lower ^[ timeout
 set ttimeoutlen=100
 set laststatus=2
-set noshowmode
-set tildeop            " use ~ to toggle case as an operator, not a motion
 set ttyfast            " Assume fast terminal
 set gdefault           " automatically overwrite all instances on s//
 set hidden
@@ -22,9 +19,7 @@ set noswapfile nobackup nowb nospell
 set lazyredraw         " No redraw while in macros
 set magic              " Turn magic on for regex
 set synmaxcol=200      " Don't syntax highlight long lines
-set diffopt=filler,iwhite
 set shortmess=aoOT     " Short messages
-set fillchars=vert:\|,fold:─
 set t_ut=              " No Background Redraw. (fixes broken background in tmux)
 set autoread           " Auto reload changed files
 if exists('&breakindent')
@@ -32,14 +27,10 @@ if exists('&breakindent')
   set wrap
 endif
 
-set modelines=0
 set encoding=utf-8
 set ffs=unix,mac,dos
 
 let g:mapleader=" "
-let g:maplocalleader=","
-nnoremap <Space> <Nop>
-xnoremap <Space> <Nop>
 
 " Tab settings
 set expandtab          " Expand tabs into spaces
@@ -53,18 +44,8 @@ autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
 
 " ================ Completion =======================
 "
-set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 
 " Textwidth
 set cc=81
@@ -82,22 +63,6 @@ if has('mouse')
   set mouse=a
 endif
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-  set t_Co=256
-endif
-
-" ----- Convenience commands and cabbrev's ------------------------------------
-
-" Make these commonly mistyped commands still work
-command! WQ wq
-command! Wq wq
-command! Wqa wqa
-command! W w
-command! Q q
-
-" Force write readonly files using sudo
-command! WS w !sudo tee %
+syntax on
+set hlsearch
+set t_Co=256

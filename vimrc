@@ -7,7 +7,6 @@ set nocompatible
 " Source Settings
 source ~/.vim/general.vim
 source ~/.vim/statusline.vim
-source ~/.vim/terminal.vim
 source ~/.vim/plugins.vim
 source ~/.vim/plugin_settings.vim
 source ~/.vim/colors.vim
