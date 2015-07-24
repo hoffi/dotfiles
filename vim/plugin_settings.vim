@@ -1,7 +1,4 @@
 " PLUGIN SETTINGS
-" ------ Supertab ------
-let g:SuperTabCrMapping=1
-
 " ------ vimux -------
 let VimuxUseNearest = 1
 " Prompt for a command to run in a tmux pane
@@ -56,14 +53,12 @@ let g:limelight_paragraph_span = 1
 let s:ag_opts = '-i --follow --hidden --column --depth 30 --nocolor --nogroup '.
     \ '--ignore "bower_modules" '.
     \ '--ignore "node_modules" '.
-    \ '--ignore "apps/*/cache/*" '.
-    \ '--ignore "apps/*/logs/*" '.
     \ '--ignore "cache" '.
     \ '--ignore "logs" '.
     \ '--ignore "log" '.
     \ '--ignore "*.sock" '.
     \ '--ignore "tmp" '.
-    \ '--ignore "spec/fixtures/vcr_cassettes/**/*" '.
+    \ '--ignore "spec/fixtures/vcr_cassettes" '.
     \ '--ignore ".git" '.
     \ '--ignore "*.ttf" '.
     \ '--ignore "*.png" '.
@@ -85,12 +80,9 @@ let g:ctrlp_abbrev = {
     \ }
 
 let g:ctrlp_cmd = 'CtrlP'
-" let g:ctrlp_working_path_mode = 'cr'
 let g:ctrlp_user_command = 'ag %s ' . s:ag_opts . ' -g ""'
-let g:ctrlp_use_caching = 0
-nnoremap <C-f> :CtrlPFunky<Cr>
-let g:ctrlp_funky_matchtype = 'path'
-let g:ctrlp_funky_syntax_highlight = 1
+let g:ctrlp_match_func = {'match': 'matcher#cmatch'}
+let g:ctrlp_use_caching = 1
 
 " ----- Ag settings -----
 let g:agprg="ag " . s:ag_opts

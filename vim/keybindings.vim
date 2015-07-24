@@ -20,8 +20,8 @@ nnoremap <silent> <leader>l :bn<CR>
 map // :nohlsearch<CR>
 
 " Close buffer
-nmap Q :Bdelete<CR>
-nmap QQ :Bdelete!<CR>
+nmap Q :bdelete<CR>
+nmap QQ :bdelete!<CR>
 
 " Keep selection after indenting
 vnoremap < <gv

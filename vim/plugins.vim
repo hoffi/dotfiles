@@ -19,7 +19,6 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
 
 """ Ruby specific
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 
@@ -42,8 +41,7 @@ if has('nvim')
 else
   Plug 'scrooloose/syntastic'
 endif
-Plug 'kien/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky', { 'on': 'CtrlPFunky' }
+Plug 'kien/ctrlp.vim' | Plug 'JazzCore/ctrlp-cmatcher', { 'do': './install.sh' }
 Plug 'rking/ag.vim'
 " File Browser
 Plug 'scrooloose/nerdtree'
