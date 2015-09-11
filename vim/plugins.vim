@@ -25,8 +25,6 @@ Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 """ Editing
 " Puts end for if, for, do, def, etc...
 Plug 'tpope/vim-endwise'
-" Tab Autocomplete !
-Plug 'ervandew/supertab'
 " gcc command to comment out code
 Plug 'tomtom/tcomment_vim'
 Plug 'briandoll/change-inside-surroundings.vim'

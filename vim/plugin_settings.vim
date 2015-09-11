@@ -80,6 +80,7 @@ let g:ctrlp_abbrev = {
     \ }
 
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_map = ' f'
 let g:ctrlp_user_command = 'ag %s ' . s:ag_opts . ' -g ""'
 let g:ctrlp_match_func = {'match': 'matcher#cmatch'}
 let g:ctrlp_use_caching = 1
