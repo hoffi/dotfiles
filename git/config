@@ -23,5 +23,6 @@
   savecrlf = true
   editor = vim
   excludesfile = ~/.gitignore_global
+  commentChar = >
 [include]
   path = ~/.gitconfig.user
