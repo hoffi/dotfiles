@@ -39,8 +39,9 @@ if has('nvim')
 else
   Plug 'scrooloose/syntastic'
 endif
-Plug 'kien/ctrlp.vim' | Plug 'JazzCore/ctrlp-cmatcher', { 'do': './install.sh' }
+Plug 'szw/vim-ctrlspace'
 Plug 'rking/ag.vim'
+Plug 'jreybert/vimagit'
 " File Browser
 Plug 'scrooloose/nerdtree'
 Plug 'svenwin/vim-splitted-nerdtree'

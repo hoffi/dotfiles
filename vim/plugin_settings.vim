@@ -66,24 +66,10 @@ let s:ag_opts = '-i --follow --hidden --column --depth 30 --nocolor --nogroup '.
     \ '--ignore ".DS_Store" '.
     \ '--ignore "*.gif"'
 
-" CtrlP
-" ignore space key in CtrlP
-let g:ctrlp_abbrev = {
-    \ 'gmode': 'itk',
-    \ 'abbrevs': [
-        \ {
-        \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
-        \ 'expanded': '',
-        \ 'mode': 'pfrz',
-        \ },
-        \ ]
-    \ }
-
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_user_command = 'ag %s ' . s:ag_opts . ' -g ""'
-let g:ctrlp_match_func = {'match': 'matcher#cmatch'}
-let g:ctrlp_use_caching = 1
+" CtrlSpace
+nnoremap <silent><leader>f :CtrlSpace O<CR>
+let g:CtrlSpaceGlobCommand = 'ag ' . s:ag_opts . ' -g ""'
+let g:CtrlSpaceSearchTiming = 0
 
 " ----- Ag settings -----
 let g:agprg="ag " . s:ag_opts
