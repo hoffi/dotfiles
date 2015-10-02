@@ -99,7 +99,15 @@ nmap QQ :bdelete!<CR>
 vnoremap < <gv
 vnoremap > >gv
 nmap <leader>n :call splittednerdtree#revealFile()<CR>
-"
+
+nmap <Leader>gcm :Gcommit<CR>
+nmap <Leader>gia :Gwrite<CR>
+nmap <Leader>gp :Gpush<CR>
+
+nmap <Leader>gws :new<CR>:set filetype=diff<CR>:r ! git status --short<CR>
+nmap <Leader>gwd :new<CR>:set filetype=diff<CR>:r ! git diff<CR>
+nmap <Leader>gid :new<CR>:set filetype=diff<CR>:r ! git diff --cached<CR>
+
 " ------ vimux -------
 " Prompt for a command to run in a tmux pane
 nmap <Leader>tc :wa<CR>:call OpenVimuxPrompt('v', '15')<CR>
