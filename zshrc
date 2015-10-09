@@ -1,34 +1,21 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+autoload -U colors && colors
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+if [ "$(uname -s)" = "Darwin" ]; then
+  source "$(brew --prefix)/share/antibody.zsh"
+else
+  source "$HOME/.dotfiles/antibody/antibody/antibody.zsh"
 fi
+antibody bundle < "$HOME/.dotfiles/zsh_bundles.txt"
 
-if [[ $(uname) == "Darwin" ]]; then
-  alias vim="mvim -v"
-fi
-
-nodename=$(uname -n)
-if [[ -s "${ZDOTDIR:-$HOME}/.dotfiles/client_settings/${nodename}.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.dotfiles/client_settings/${nodename}.zsh"
-fi
-
-bindkey -e
-
-# Aliases
+bindkey -v
+setopt auto_cd
+setopt nobeep
+export KEYTIMEOUT=10
 alias cl="clear"
-alias rm='nocorrect rm' # No prompt on deleting
-alias git='noglob git'
+alias ls='ls -G'
 
 # https://github.com/Nix-wie-weg/zsh-functions-and-aliases
 browse() { open $(eval ${1}) }
-
 alias branch_current='git rev-parse --abbrev-ref HEAD'
 alias branch_oldest_ancestor='/usr/bin/diff -u <(git rev-list --first-parent master) <(git rev-list --first-parent HEAD) | sed -ne "s/^ //p" | head -1'
 alias branch_log='git log $(branch_oldest_ancestor)..HEAD'
@@ -42,6 +29,19 @@ alias bbb='browse bitbucket_repo_url'
 alias bbbr='browse bitbucket_review_url'
 alias bred='browse redmine_url'
 
+# bind UP and DOWN arrow keys
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+# bind UP and DOWN arrow keys (compatibility fallback
+# for Ubuntu 12.04, Fedora 21, and MacOSX 10.9 users)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# bind k and j for VI mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zshrc.after" ]]; then
   source "${ZDOTDIR:-$HOME}/.zshrc.after"

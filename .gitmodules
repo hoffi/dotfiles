@@ -1,9 +1,6 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
-[submodule "prezto"]
-	path = prezto
-	url = git@github.com:sorin-ionescu/prezto.git
 [submodule "bin/mux"]
 	path = bin/mux
 	url = git@bitbucket.org:snippets/nix-wie-weg/ngyd/mux.git

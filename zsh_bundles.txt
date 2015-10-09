@@ -1,0 +1,12 @@
+mafredri/zsh-async
+zsh-users/zsh-syntax-highlighting
+sindresorhus/pure
+zsh-users/zsh-completions
+zsh-users/zsh-history-substring-search
+hoffi/zsh-git-aliases
+sharat87/zsh-vim-mode
+willghatch/zsh-saneopt
+johnhamelink/rvm-zsh
+djui/alias-tips
+caarlos0/zsh-mkc
+Tarrasch/zsh-autoenv
