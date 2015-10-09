@@ -39,10 +39,6 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# bind k and j for VI mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
 if [[ -s "${ZDOTDIR:-$HOME}/.zshrc.after" ]]; then
   source "${ZDOTDIR:-$HOME}/.zshrc.after"
 fi
