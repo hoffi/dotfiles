@@ -3,7 +3,7 @@ autoload -U colors && colors
 if [ "$(uname -s)" = "Darwin" ]; then
   source "$(brew --prefix)/share/antibody.zsh"
 else
-  source "$HOME/.dotfiles/antibody/antibody/antibody.zsh"
+  source "$HOME/.dotfiles/antibody.zsh"
 fi
 antibody bundle < "$HOME/.dotfiles/zsh_bundles.txt"
 
