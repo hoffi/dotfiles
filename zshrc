@@ -14,6 +14,11 @@ export KEYTIMEOUT=10
 alias cl="clear"
 alias ls='ls -G'
 
+# Ruby Aliases
+alias rbb='bundle'
+alias rbbe='bundle exec'
+alias rbbi='bundle install --path vendor/bundle'
+
 # https://github.com/Nix-wie-weg/zsh-functions-and-aliases
 browse() { open $(eval ${1}) }
 alias branch_current='git rev-parse --abbrev-ref HEAD'
