@@ -10,7 +10,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
 
 """ Appearance
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'sjl/badwolf'
 Plug 'sheerun/vim-polyglot'
 Plug 'bling/vim-airline'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
@@ -80,8 +80,8 @@ set hlsearch
 set t_Co=256
 
 set background=dark
-colorscheme PaperColor
-let g:airline_theme = 'PaperColor'
+colorscheme badwolf
+let g:airline_theme = 'badwolf'
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
@@ -180,12 +180,13 @@ let g:CtrlSpaceGlobCommand = 'ag ' . s:ag_opts . ' -g ""'
 let g:CtrlSpaceSearchTiming = 0
 
 " ----- Ag settings -----
-let g:agprg="ag " . s:ag_opts
+let g:ag_prg="ag " . s:ag_opts
 nmap <leader>g :Ag! ""<left>
 nnoremap K :Ag! "<C-R><C-W>"<CR>
 
 " ---- vim-vroom settings ----
 let g:vroom_use_vimux = 1
+let g:vroom_use_bundle_exec = 1
 let g:vroom_use_zeus = 1 " Always use zeus when it is running!
 
 " ---- airline ----
