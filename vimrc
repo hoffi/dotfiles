@@ -12,6 +12,7 @@ Plug 'christoomey/vim-tmux-navigator'
 """ Appearance
 Plug 'sjl/badwolf'
 Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'bling/vim-airline'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
 
@@ -85,6 +86,9 @@ let g:airline_theme = 'badwolf'
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+
+" I don't want c to copy anything..
+noremap <silent> c "_c
 
 noremap <silent> Y y$
 nnoremap <leader>w :w<CR>
