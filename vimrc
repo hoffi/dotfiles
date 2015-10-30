@@ -44,7 +44,6 @@ call plug#end()
 let g:mapleader=" "
 set number             " line numbers
 set linebreak          " wrap lines on 'word' boundaries
-set splitright         " Vertical splits use right half of screen
 set timeout
 set timeoutlen=300     " Lower ^[ timeout
 set ttyfast            " Assume fast terminal
@@ -86,6 +85,8 @@ let g:airline_theme = 'badwolf'
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+
+autocmd BufNewFile,BufRead magit-playground setf git
 
 " I don't want c to copy anything..
 noremap <silent> c "_c
