@@ -63,7 +63,7 @@ git_prompt_info() {
 }
 
 function git_status() {
-  git_status=$(git status --porcelain -unormal)
+  git_status=$(git status --porcelain -b -unormal --ignore-submodules=all)
   output=""
   if $(echo "$git_status" | grep '^UU ' &> /dev/null); then
     output="$output%{$fg[blue]%}°"
@@ -79,6 +79,9 @@ function git_status() {
   fi
   if $(echo "$git_status" | grep '^?? ' &> /dev/null); then
     output="$output%{$fg[white]%}*"
+  fi
+  if $(echo "$git_status" | grep '^## .*ahead' &> /dev/null); then
+    output="$output%F{156}⬈"
   fi
   echo $output
 }
