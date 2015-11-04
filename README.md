@@ -21,6 +21,10 @@ name = NAME
 email = EMAIL
 ```
 
+## Theme
+
+[hoffi/zsh-theme-lambda](https://github.com/hoffi/zsh-theme-lambda)
+
 ## Thanks to
 
 * [Anish Athalye](http://www.anishathalye.com) for his [dotbot](https://github.com/anishathalye/dotbot) script
