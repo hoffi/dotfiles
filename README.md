@@ -24,4 +24,4 @@ email = EMAIL
 ## Thanks to
 
 * [Anish Athalye](http://www.anishathalye.com) for his [dotbot](https://github.com/anishathalye/dotbot) script
-* [Sorin Ionescu](https://github.com/sorin-ionescu) for creating [prezto](https://github.com/sorin-ionescu/prezto)
+* [Carlos Alexandro Becker](https://github.com/caarlos0) for creating [antibody](https://github.com/caarlos0/antibody)
