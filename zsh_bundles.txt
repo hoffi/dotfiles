@@ -2,6 +2,7 @@ mafredri/zsh-async
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search
+hoffi/zsh-theme-lambda
 hoffi/zsh-git-aliases
 sharat87/zsh-vim-mode
 willghatch/zsh-saneopt
