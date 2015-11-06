@@ -12,7 +12,7 @@ setopt auto_cd
 setopt nobeep
 export KEYTIMEOUT=10
 alias cl="clear"
-alias ls='ls -G'
+alias ls='ls -G --color=auto'
 
 # Ruby Aliases
 alias rbb='bundle'
