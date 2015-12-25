@@ -2,8 +2,10 @@ autoload -U colors && colors
 
 if [ "$(uname -s)" = "Darwin" ]; then
   source "$(brew --prefix)/share/antibody.zsh"
+  alias ls='ls -G'
 else
   source "$HOME/.dotfiles/antibody.zsh"
+  alias ls='ls -G --color=auto'
 fi
 antibody bundle < "$HOME/.dotfiles/zsh_bundles.txt"
 
@@ -12,7 +14,6 @@ setopt auto_cd
 setopt nobeep
 export KEYTIMEOUT=10
 alias cl="clear"
-alias ls='ls -G --color=auto'
 
 # Ruby Aliases
 alias rbb='bundle'
