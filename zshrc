@@ -58,3 +58,6 @@ if [ "$(uname -s)" = "Darwin" ]; then
 else
   eval $(dircolors -b $HOME/.dircolors)
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS='--color=16'

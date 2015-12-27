@@ -33,8 +33,9 @@ Plug 'benekastah/neomake'
 if !has('nvim')
   Plug 'scrooloose/syntastic'
 endif
-Plug 'szw/vim-ctrlspace'
-Plug 'rking/ag.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" Plug 'rking/ag.vim'
 Plug 'jreybert/vimagit'
 Plug 'scrooloose/nerdtree'
 Plug 'svenwin/vim-splitted-nerdtree'
@@ -163,7 +164,7 @@ let g:limelight_default_coefficient = 0.7
 let g:limelight_paragraph_span = 1
 
 " ag Options
-let s:ag_opts = '-i --follow --hidden --column --depth 10 --nocolor --nogroup '.
+let s:ag_opts = '-i --follow --hidden --column --nocolor --nogroup '.
     \ '--ignore "bower_modules" '.
     \ '--ignore "node_modules" '.
     \ '--ignore "cache" '.
@@ -179,15 +180,15 @@ let s:ag_opts = '-i --follow --hidden --column --depth 10 --nocolor --nogroup '.
     \ '--ignore ".DS_Store" '.
     \ '--ignore "*.gif"'
 
-" CtrlSpace
-nnoremap <silent><leader>f :CtrlSpace O<CR>
-let g:CtrlSpaceGlobCommand = 'ag ' . s:ag_opts . ' -g ""'
-let g:CtrlSpaceSearchTiming = 0
+" FZF
+nnoremap <silent><leader>f :Files<CR>
+nnoremap <silent><leader>b :Buffers<CR>
+nnoremap <silent><leader>c :Colors<CR>
 
 " ----- Ag settings -----
-let g:ag_prg="ag " . s:ag_opts
-nmap <leader>g :Ag! ""<left>
-nnoremap K :Ag! "<C-R><C-W>"<CR>
+" let g:ag_prg="ag " . s:ag_opts
+" nmap <leader>g :Ag! ""<left>
+" nnoremap K :Ag! "<C-R><C-W>"<CR>
 
 " ---- vim-vroom settings ----
 let g:vroom_use_vimux = 1
