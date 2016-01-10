@@ -4,6 +4,7 @@ call plug#begin('~/.dotfiles/vim/plugged')
 
 """ General
 Plug 'tpope/vim-sensible'
+Plug 'rstacruz/vim-opinion'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 
@@ -43,28 +44,15 @@ Plug 'svenwin/vim-splitted-nerdtree'
 call plug#end()
 
 let g:mapleader=" "
-set number             " line numbers
 set linebreak          " wrap lines on 'word' boundaries
 set timeout
 set timeoutlen=300     " Lower ^[ timeout
-set ttyfast            " Assume fast terminal
 set gdefault           " automatically overwrite all instances on s//
-set hidden
-set noswapfile nobackup nowb nospell
-set lazyredraw         " No redraw while in macros
 set magic              " Turn magic on for regex
 set breakindent        " Indent wrapped lines up to the same level
-set nowrap
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 set encoding=utf-8
 set ffs=unix,mac,dos
 
-" Tab settings
-set expandtab          " Expand tabs into spaces
-set tabstop=2          " default to 2 spaces for a hard tab
-set softtabstop=2      " default to 2 spaces for the soft tab
-set shiftwidth=2       " for when <TAB> is pressed at the beginning of a line
 autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
 
 " Textwidth
@@ -76,8 +64,6 @@ iab pry! require 'pry'; binding.pry
 iab css! page.save_screenshot 'test.png', full: true
 iab vcr! VCR.record_this_example
 
-syntax on
-set hlsearch
 set t_Co=256
 
 set background=dark
