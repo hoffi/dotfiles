@@ -4,6 +4,7 @@
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim/
     ~/.vimrc: vimrc
+    ~/.zsh: zsh/
     ~/.zshrc: zshrc
     ~/.zshenv: zshenv
     ~/.zprofile: zprofile
@@ -14,6 +15,7 @@
     ~/.inputrc: inputrc
     ~/.irbrc: ruby/irbrc
     ~/.pryrc: ruby/pryrc
+    ~/.zplug: zplug/
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

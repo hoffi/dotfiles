@@ -5,3 +5,7 @@ vim/.vundles.local.bak
 vim/bundle
 vim/plugged
 vim/sessions
+zplug/bin
+zplug/repos
+zplug/zcompdump
+zplug/.cache
