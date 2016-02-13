@@ -12,7 +12,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 """ Appearance
 Plug 'sjl/badwolf'
-Plug 'sheerun/vim-polyglot'
+Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'bling/vim-airline'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
@@ -49,7 +49,6 @@ set timeout
 set timeoutlen=300     " Lower ^[ timeout
 set gdefault           " automatically overwrite all instances on s//
 set magic              " Turn magic on for regex
-set breakindent        " Indent wrapped lines up to the same level
 set encoding=utf-8
 set ffs=unix,mac,dos
 
@@ -65,13 +64,11 @@ iab css! page.save_screenshot 'test.png', full: true
 iab vcr! VCR.record_this_example
 
 set t_Co=256
+set mouse=a
 
 set background=dark
-colorscheme badwolf
-let g:airline_theme = 'badwolf'
-
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+colorscheme gruvbox
+let g:airline_theme = 'gruvbox'
 
 autocmd BufNewFile,BufRead magit-playground setf git
 
