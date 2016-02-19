@@ -14,7 +14,7 @@ zplug "caarlos0/zsh-mkc"
 zplug "Tarrasch/zsh-autoenv", nice:14
 zplug "rimraf/k", nice:15
 zplug "trapd00r/LS_COLORS", of:"LS_COLORS", as:command, nice:16
-zplug "~/.zsh", from:local, nice:17, file:"*.zsh"
+zplug "~/.zsh", from:local, file:"*.zsh"
 
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "
@@ -22,5 +22,8 @@ if ! zplug check --verbose; then
     echo; zplug install
   fi
 fi
-
 zplug load
+
+export XDG_CONFIG_HOME="$HOME/.config"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

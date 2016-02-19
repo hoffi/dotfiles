@@ -3,15 +3,12 @@ set nocompatible
 call plug#begin('~/.dotfiles/vim/plugged')
 
 """ General
-Plug 'tpope/vim-sensible'
 Plug 'rstacruz/vim-opinion'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 
 Plug 'christoomey/vim-tmux-navigator'
 
 """ Appearance
-Plug 'sjl/badwolf'
 Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'bling/vim-airline'
@@ -31,17 +28,16 @@ Plug 'benmills/vimux'
 
 """ Project
 Plug 'benekastah/neomake'
-if !has('nvim')
-  Plug 'scrooloose/syntastic'
-endif
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'rking/ag.vim'
-Plug 'jreybert/vimagit'
 Plug 'scrooloose/nerdtree'
 Plug 'svenwin/vim-splitted-nerdtree'
 
 call plug#end()
+
+if has('nvim')
+  let g:loaded_python_provider = 1
+endif
 
 let g:mapleader=" "
 set linebreak          " wrap lines on 'word' boundaries
@@ -64,13 +60,9 @@ iab css! page.save_screenshot 'test.png', full: true
 iab vcr! VCR.record_this_example
 
 set t_Co=256
-set mouse=a
-
 set background=dark
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
-
-autocmd BufNewFile,BufRead magit-playground setf git
 
 " I don't want c to copy anything..
 noremap <silent> c "_c
@@ -135,43 +127,13 @@ autocmd User GoyoLeave Limelight!
 
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
-
-" Color name (:help gui-colors) or RGB color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
-
-" Default: 0.5
 let g:limelight_default_coefficient = 0.7
-
-" Number of preceding/following paragraphs to include (default: 0)
 let g:limelight_paragraph_span = 1
 
-" ag Options
-let s:ag_opts = '-i --follow --hidden --column --nocolor --nogroup '.
-    \ '--ignore "bower_modules" '.
-    \ '--ignore "node_modules" '.
-    \ '--ignore "cache" '.
-    \ '--ignore "logs" '.
-    \ '--ignore "log" '.
-    \ '--ignore "*.sock" '.
-    \ '--ignore "tmp" '.
-    \ '--ignore "spec/fixtures/vcr_cassettes" '.
-    \ '--ignore ".git" '.
-    \ '--ignore "*.ttf" '.
-    \ '--ignore "*.png" '.
-    \ '--ignore "*.jpg" '.
-    \ '--ignore ".DS_Store" '.
-    \ '--ignore "*.gif"'
-
 " FZF
-nnoremap <silent><leader>f :Files<CR>
+nnoremap <silent><leader>f :FZF<CR>
 nnoremap <silent><leader>b :Buffers<CR>
 nnoremap <silent><leader>c :Colors<CR>
-
-" ----- Ag settings -----
-" let g:ag_prg="ag " . s:ag_opts
-" nmap <leader>g :Ag! ""<left>
-" nnoremap K :Ag! "<C-R><C-W>"<CR>
 
 " ---- vim-vroom settings ----
 let g:vroom_use_vimux = 1
