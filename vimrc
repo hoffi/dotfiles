@@ -40,24 +40,18 @@ if has('nvim')
 endif
 
 let g:mapleader=" "
-set linebreak          " wrap lines on 'word' boundaries
-set timeout
-set timeoutlen=300     " Lower ^[ timeout
-set gdefault           " automatically overwrite all instances on s//
-set magic              " Turn magic on for regex
 set encoding=utf-8
 set ffs=unix,mac,dos
-
-autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
-
-" Textwidth
 set cc=81
 set textwidth=80
 
+autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
+
 " --- Abbreviations ----
-iab pry! require 'pry'; binding.pry
-iab css! page.save_screenshot 'test.png', full: true
-iab vcr! VCR.record_this_example
+autocmd FileType ruby iab <buffer> pry! require 'pry'; binding.pry
+autocmd FileType ruby iab <buffer> vcr! VCR.record_this_example
+autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', full: true
+autocmd FileType javascript inoremap <buffer> ƒ function() {<CR>}<up><end><left><left><left>
 
 set t_Co=256
 set background=dark
