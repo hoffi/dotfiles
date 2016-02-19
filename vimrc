@@ -1,38 +1,25 @@
 set nocompatible
-
 call plug#begin('~/.dotfiles/vim/plugged')
-
-""" General
 Plug 'rstacruz/vim-opinion'
 Plug 'tpope/vim-fugitive'
-
 Plug 'christoomey/vim-tmux-navigator'
-
-""" Appearance
 Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'bling/vim-airline'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
-
-""" Ruby specific
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise' " Puts end for if, for, do, def, etc...
-
-""" Editing
 Plug 'tpope/vim-surround' " cs[{
 Plug 'tomtom/tcomment_vim' " gcc command to comment out code
 Plug 'briandoll/change-inside-surroundings.vim'
 Plug 'Raimondi/delimitMate' " Automatic closing of brackets, quotes, ...
 Plug 'benmills/vimux'
-
-""" Project
 Plug 'benekastah/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'svenwin/vim-splitted-nerdtree'
-
 call plug#end()
 
 if has('nvim')
@@ -75,14 +62,6 @@ vnoremap < <gv
 vnoremap > >gv
 nmap <leader>n :call splittednerdtree#revealFile()<CR>
 
-nmap <Leader>gcm :Gcommit<CR>
-nmap <Leader>gia :Gwrite<CR>
-nmap <Leader>gp :Gpush<CR>
-
-nmap <Leader>gws :new<CR>:set filetype=diff<CR>:r ! git status --short<CR>
-nmap <Leader>gwd :new<CR>:set filetype=diff<CR>:r ! git diff<CR>
-nmap <Leader>gid :new<CR>:set filetype=diff<CR>:r ! git diff --cached<CR>
-
 " ------ vimux -------
 " Prompt for a command to run in a tmux pane
 nmap <Leader>tc :wa<CR>:call OpenVimuxPrompt('v', '15')<CR>
@@ -108,11 +87,6 @@ nmap <Leader>tz :VimuxZoomRunner<CR>
 " ------ syntastic and neomake -------
 if has('nvim')
   autocmd! BufWritePost *.rb Neomake
-else
-  let g:syntastic_auto_loc_list = 0
-  let g:syntastic_check_on_open = 0
-  let g:syntastic_check_on_wq = 1
-  let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 endif
 
 " LimeLight
