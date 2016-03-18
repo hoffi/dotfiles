@@ -5,6 +5,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
+Plug 'dag/vim-fish'
 Plug 'bling/vim-airline'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
@@ -112,3 +113,7 @@ let g:vroom_use_zeus = 1 " Always use zeus when it is running!
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep =''
+
+if &shell =~# 'fish$'
+  set shell=sh
+endif

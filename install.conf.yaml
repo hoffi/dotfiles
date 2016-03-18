@@ -4,18 +4,14 @@
     ~/.tmux.conf: tmux.conf
     ~/.vim: vim/
     ~/.vimrc: vimrc
-    ~/.zsh: zsh/
-    ~/.zshrc: zshrc
-    ~/.zshenv: zshenv
-    ~/.zprofile: zprofile
-    ~/.zlogin: zlogin
     ~/.gitconfig: git/config
     ~/.gitignore_global: git/ignore
     ~/.gemrc: gemrc
     ~/.inputrc: inputrc
     ~/.irbrc: ruby/irbrc
     ~/.pryrc: ruby/pryrc
-    ~/.zplug: zplug/
+    ~/.config/fish/config.fish: config.fish
+    ~/.config/fish/functions: functions/
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
