@@ -3,15 +3,16 @@ call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'rstacruz/vim-opinion'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'morhetz/gruvbox'
+Plug 'freeo/vim-kalisi'
+Plug 'rhysd/clever-f.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'dag/vim-fish'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' }
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise' " Puts end for if, for, do, def, etc...
-Plug 'tpope/vim-surround' " cs[{
 Plug 'tomtom/tcomment_vim' " gcc command to comment out code
 Plug 'briandoll/change-inside-surroundings.vim'
 Plug 'Raimondi/delimitMate' " Automatic closing of brackets, quotes, ...
@@ -43,8 +44,8 @@ autocmd FileType javascript inoremap <buffer> ƒ function() {<CR>}<up><end><left
 
 set t_Co=256
 set background=dark
-colorscheme gruvbox
-let g:airline_theme = 'gruvbox'
+colorscheme kalisi
+let g:airline_theme = 'kalisi'
 
 " I don't want c to copy anything..
 noremap <silent> c "_c
@@ -117,3 +118,6 @@ let g:airline_right_sep =''
 if &shell =~# 'fish$'
   set shell=sh
 endif
+
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden --ignore .git -g ""'
