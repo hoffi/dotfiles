@@ -22,13 +22,24 @@ Plug 'benekastah/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'svenwin/vim-splitted-nerdtree'
+" Plug 'svenwin/vim-splitted-nerdtree'
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_sort_sequence = '[\/]$,*'
+let g:netrw_special_syntax= 1
+
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+
 if has('nvim')
   let g:loaded_python_provider = 1
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
 let g:mapleader=" "
@@ -65,7 +76,8 @@ nmap Q :bdelete<CR>
 nmap QQ :bdelete!<CR>
 vnoremap < <gv
 vnoremap > >gv
-nmap <leader>n :call splittednerdtree#revealFile()<CR>
+" nmap <leader>n :call splittednerdtree#revealFile()<CR>
+nmap <leader>n :NERDTreeFind<CR>
 
 " ------ vimux -------
 " Prompt for a command to run in a tmux pane
@@ -107,6 +119,7 @@ let g:limelight_paragraph_span = 1
 nnoremap <silent><leader>f :Files<CR>
 nnoremap <silent><leader>b :Buffers<CR>
 nnoremap <silent><leader>c :Colors<CR>
+let $FZF_DEFAULT_COMMAND = 'ag -l --ignore ".git" --hidden -g ""'
 
 " ---- vim-vroom settings ----
 let g:vroom_use_vimux = 1
@@ -115,6 +128,7 @@ let g:vroom_use_zeus = 1 " Always use zeus when it is running!
 
 " ---- airline ----
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_left_sep = ' '
 let g:airline_right_sep = ' '
