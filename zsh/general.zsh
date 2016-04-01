@@ -17,7 +17,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zshrc.after" ]]; then
   source "${ZDOTDIR:-$HOME}/.zshrc.after"
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && export FZF_DEFAULT_OPTS='--color=16'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && export FZF_DEFAULT_OPTS='--color=light'
 
 [ -f ~/.nvm/nvm.sh ] && source ~/.nvm/nvm.sh
 
