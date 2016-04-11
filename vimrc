@@ -36,6 +36,8 @@ set encoding=utf-8
 set ffs=unix,mac,dos
 set cc=81
 set textwidth=80
+set splitbelow
+set splitright
 
 autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
 
