@@ -26,7 +26,7 @@ let g:NERDTreeAutoDeleteBuffer = 1
 
 if has('nvim')
   let g:loaded_python_provider = 1
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
@@ -57,8 +57,6 @@ noremap <silent> c "_c
 noremap <silent> Y y$
 nnoremap <leader>w :w<CR>
 map 0 ^
-nmap vv :vnew<CR>
-nmap ss :new<CR>
 nnoremap <silent> <leader>h :bp<CR>
 nnoremap <silent> <leader>l :bn<CR>
 map // :nohlsearch<CR>
@@ -110,8 +108,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_alt_sep = ''
 let g:airline_powerline_fonts = 1
 
 if &shell =~# 'fish$'

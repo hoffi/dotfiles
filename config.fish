@@ -1,5 +1,6 @@
 set --erase fish_greeting
 
+set -U EDITOR nvim
 set -U fish_user_abbreviations
 set -U fish_user_paths "/usr/local/bin"
 set -x GREP_OPTIONS "--color=auto"
