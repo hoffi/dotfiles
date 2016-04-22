@@ -27,3 +27,5 @@ zplug load
 export XDG_CONFIG_HOME="$HOME/.config"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

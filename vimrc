@@ -1,7 +1,7 @@
 set nocompatible
 call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'rstacruz/vim-opinion'
-Plug 'freeo/vim-kalisi'
+Plug 'christophermca/meta5'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
@@ -9,15 +9,13 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'benekastah/neomake'
-Plug 'Shougo/deoplete.nvim'
 Plug 'rhysd/clever-f.vim'
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' } | Plug 'benmills/vimux', { 'for': 'ruby' }
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise', { 'for': 'ruby' } " Puts end for if, for, do, def, etc...
 Plug 'tomtom/tcomment_vim' " gcc command to comment out code
 Plug 'Raimondi/delimitMate' " Automatic closing of brackets, quotes, ...
-Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
@@ -48,9 +46,9 @@ autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', 
 autocmd FileType javascript inoremap <buffer> ƒ function() {<CR>}<up><end><left><left><left>
 
 set t_Co=256
-set background=light
-colorscheme kalisi
-let g:airline_theme = 'kalisi'
+set background=dark
+colorscheme meta5
+let g:airline_theme = 'dark'
 
 " I don't want c to copy anything..
 noremap <silent> c "_c
@@ -71,8 +69,9 @@ nmap <leader>n :NERDTreeFind<CR>
 
 " ------ syntastic and neomake -------
 if has('nvim')
-  autocmd! BufWritePost *.rb Neomake
+  autocmd! BufWritePost *.rb,*.js Neomake
 endif
+let g:neomake_javascript_enabled_makers = ['eslint']
 
 " ------ Goyo ------
 function! s:goyo_enter()
@@ -80,6 +79,7 @@ function! s:goyo_enter()
   silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
   set noshowmode
   set scrolloff=999
+  Limelight
 endfunction
 
 function! s:goyo_leave()
@@ -87,6 +87,7 @@ function! s:goyo_leave()
   silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
   set showmode
   set scrolloff=4
+  Limelight!
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -108,6 +109,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_alt_sep = ''
 let g:airline_powerline_fonts = 1
 
 let g:deoplete#enable_at_startup = 1
