@@ -1,76 +1,82 @@
-function fish_prompt --description 'Write out the prompt'
-  set -l last_status $status
+set -g pad " "
 
-  function ssh_connection
-    if [ -n "$SSH_CONNECTION" ]
-      set_color -ou red
-      echo "(ssh)"
-      set_color white
-      echo -n (whoami)'@'(hostname)':'
-      set_color normal
-    end
+## Function to show a segment
+function prompt_segment -d "Function to show a segment"
+  # Get colors
+  set -l bg $argv[1]
+  set -l fg $argv[2]
+
+  # Set 'em
+  set_color -b $bg
+  set_color $fg
+
+  # Print text
+  if [ -n "$argv[3]" ]
+    echo -n -s $argv[3]
   end
+end
 
-  function git_status
-    set -l git_status (command git status --porcelain -b -unormal --ignore-submodules=all | cut -c 1-2)
-    if [ (count (echo $git_status | grep 'UU')) -gt 0 ]
-      set_color blue
-      echo -n '°'
+## Function to show current status
+function show_status -d "Function to show the current status"
+  if [ $RETVAL -ne 0 ]
+    prompt_segment red white " ▲ "
+    set pad ""
     end
-    if [ (count (echo $git_status | grep -E "(M|R|C|T)")) -gt 0 ]
-      set_color yellow
-      echo -n '!'
+  if [ -n "$SSH_CLIENT" ]
+      prompt_segment blue white " SSH: "
+      set pad ""
     end
-    if [ (count (echo $git_status | grep '??')) -gt 0 ]
-      set_color white
-      echo -n '*'
-    end
-    if [ (count (echo $git_status | grep 'A')) -gt 0 ]
-      set_color green
-      echo -n '+'
-    end
-    if [ (count (echo $git_status | grep 'D')) -gt 0 ]
-      set_color red
-      echo -n '-'
-    end
-    if [ (count (echo $git_status | grep '^## .*ahead')) -gt 0 ]
-      set_color 156
-      echo -n '⬈'
-    end
+end
+
+function show_virtualenv -d "Show active python virtual environments"
+  if set -q VIRTUAL_ENV
+    set -l venvname (basename "$VIRTUAL_ENV")
+    prompt_segment normal white " ($venvname)"
   end
+end
 
-  function my_git_prompt
-    set -l tester (git rev-parse --git-dir 2> /dev/null)
-    if test -n "$tester"
-      set_color -o white
-      echo "‹"
-      set_color -u 136
-      echo -n (branch_current)
-      set_color normal
-      echo (git_status)
-      set_color -o white
-      echo "›"
-      set_color normal
+## Show user if not default
+function show_user -d "Show user"
+  if [ "$USER" != "$default_user" -o -n "$SSH_CLIENT" ]
+    set -l host (hostname -s)
+    set -l who (whoami)
+    prompt_segment normal yellow " $who"
+
+    # Skip @ bit if hostname == username
+    if [ "$USER" != "$HOST" ]
+      prompt_segment normal white "@"
+      prompt_segment normal green "$host "
+      set pad ""
     end
-  end
+    end
+end
 
-  function _path
-    set_color 245
-    echo (pwd)
+# Show directory
+function show_pwd -d "Show the current directory"
+  set -l pwd (prompt_pwd)
+  prompt_segment normal blue "$pad$pwd "
+end
+
+# Show prompt w/ privilege cue
+function show_prompt -d "Shows prompt with cue for current priv"
+  set -l uid (id -u $USER)
+    if [ $uid -eq 0 ]
+    prompt_segment red white " ! "
     set_color normal
-  end
-
-  echo (ssh_connection) (_path) (my_git_prompt)
-
-  if [ $last_status -ne 0 ]
-    set_color -o red
+    echo -n -s " "
   else
-    set_color -o green
-  end
-  echo -n 'λ '
-  set_color normal
+    prompt_segment normal white " \$ "
+    end
 
-  fzf_key_bindings
-  setup_colors
-  git_aliases
+  set_color normal
+end
+
+## SHOW PROMPT
+function fish_prompt
+  set -g RETVAL $status
+  show_status
+  show_virtualenv
+  show_user
+  show_pwd
+  show_prompt
 end
