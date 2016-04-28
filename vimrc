@@ -38,6 +38,10 @@ set textwidth=80
 set splitbelow
 set splitright
 
+" Faster key bindings
+set timeoutlen=200
+set ttimeoutlen=200
+
 autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
 
 " --- Abbreviations ----
