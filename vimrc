@@ -54,6 +54,7 @@ set t_Co=256
 set background=dark
 colorscheme meta5
 let g:airline_theme = 'dark'
+let g:airline_extensions = ['tabline', 'quickfix']
 
 " I don't want c to copy anything..
 noremap <silent> c "_c
@@ -108,11 +109,11 @@ let g:vroom_use_zeus = 1 " Always use zeus when it is running!
 
 " ---- airline ----
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tabs = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_powerline_fonts = 1
 
 if &shell =~# 'fish$'
   set shell=sh
