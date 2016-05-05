@@ -3,7 +3,6 @@ call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'rstacruz/vim-opinion'
 Plug 'christophermca/meta5'
 Plug 'sheerun/vim-polyglot'
-Plug 'dag/vim-fish'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
