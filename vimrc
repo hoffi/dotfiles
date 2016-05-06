@@ -6,6 +6,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'kana/vim-submode'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'benekastah/neomake'
@@ -117,3 +118,25 @@ let g:airline_right_sep = ''
 if &shell =~# 'fish$'
   set shell=sh
 endif
+
+" ----- Vim Submode ------
+let g:submode_always_show_submode = 1
+let g:submode_timeout = 0
+let g:submode_keysqs_to_leave = '<Esc>'
+
+" Window Management
+call submode#enter_with('window', 'n', '', '<C-w>')
+
+for key in ['a','b','c','d','e','f','g','h','i','j','k','l','m',
+\           'n','o','p','q','r','s','t','u','v','w','x','y','z']
+  call submode#map('window', 'n', '', key, '<C-w>' . key)
+  call submode#map('window', 'n', '', toupper(key), '<C-w>' . toupper(key))
+  call submode#map('window', 'n', '', '<C-' . key . '>', '<C-w>' . '<C-'.key . '>')
+endfor
+
+call submode#map('window', 'n', '', '=', '<C-w>=')
+call submode#map('window', 'n', '', '<bar>', '<C-w><bar>')
+call submode#map('window', 'n', '', '+', '3<C-w>+')
+call submode#map('window', 'n', '', '-', '3<C-w>-')
+call submode#map('window', 'n', '', '<', '5<C-w><')
+call submode#map('window', 'n', '', '>', '5<C-w>>')
