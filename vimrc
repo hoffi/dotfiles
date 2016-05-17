@@ -7,8 +7,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kana/vim-submode'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'benekastah/neomake'
 Plug 'rhysd/clever-f.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
@@ -24,9 +23,36 @@ let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 
+let g:ctrlp_map = '<leader>f'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_regexp = 1
+let g:ctrlp_reuse_window = 'NERD\|help\|quickfix'
+" ignore space key in CtrlP
+let g:ctrlp_abbrev = {
+    \ 'gmode': 'i',
+    \ 'abbrevs': [
+			\ {
+			\ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
+			\ 'expanded': '',
+			\ 'mode': 'pfrz',
+			\ },
+			\ ]
+    \ }
+
+if executable('ag')
+	" ag is so fast
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore ".git" --hidden -i'
+	let g:ctrlp_lazy_update = 30
+  set grepprg=ag\ --nogroup\ --nocolor
+  nnoremap K :Ag <C-R><C-W><CR>
+  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+endif
+
 if has('nvim')
   let g:loaded_python_provider = 1
-  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
@@ -39,8 +65,8 @@ set splitbelow
 set splitright
 
 " Faster key bindings
-set timeoutlen=200
-set ttimeoutlen=200
+set timeoutlen=400
+set ttimeoutlen=400
 
 autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
 
@@ -54,7 +80,7 @@ set t_Co=256
 set background=dark
 colorscheme meta5
 let g:airline_theme = 'dark'
-let g:airline_extensions = ['tabline', 'quickfix']
+let g:airline_extensions = ['tabline', 'quickfix', 'ctrlp']
 
 " I don't want c to copy anything..
 noremap <silent> c "_c
@@ -96,11 +122,6 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-" FZF
-let $FZF_DEFAULT_COMMAND = 'ag -l --ignore ".git" --hidden -g ""'
-nnoremap <silent><leader>f :Files<CR>
-nnoremap <silent><leader>b :Buffers<CR>
 
 " ---- vim-vroom settings ----
 let g:vroom_use_vimux = 1
