@@ -4,8 +4,8 @@
 
 ## Installation
 Clone the repo and run the install script:
-```bash
-git clone git@github.com:hoffi/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && ./install
+```fish
+git clone git@github.com:hoffi/dotfiles.git ~/.dotfiles; and cd ~/.dotfiles; and ./install
 ```
 
 To update simply `cd` into the `.dotfiles` directory and `git pull`.
@@ -20,12 +20,3 @@ and add your user infos:
 name = NAME
 email = EMAIL
 ```
-
-## Theme
-
-[hoffi/zsh-theme-lambda](https://github.com/hoffi/zsh-theme-lambda)
-
-## Thanks to
-
-* [Anish Athalye](http://www.anishathalye.com) for his [dotbot](https://github.com/anishathalye/dotbot) script
-* [Carlos Alexandro Becker](https://github.com/caarlos0) for creating [antibody](https://github.com/caarlos0/antibody)
