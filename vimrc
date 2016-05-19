@@ -1,9 +1,9 @@
 set nocompatible
 call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'rstacruz/vim-opinion'
+Plug 'tpope/vim-vinegar'
 Plug 'christophermca/meta5'
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kana/vim-submode'
@@ -19,15 +19,13 @@ Plug 'Raimondi/delimitMate' " Automatic closing of brackets, quotes, ...
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeAutoDeleteBuffer = 1
+let g:netrw_preview = 1
+let g:netrw_liststyle = 3
 
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-" let g:ctrlp_regexp = 1
-let g:ctrlp_reuse_window = 'NERD\|help\|quickfix'
+let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
 " ignore space key in CtrlP
 let g:ctrlp_abbrev = {
     \ 'gmode': 'i',
@@ -95,7 +93,7 @@ nmap Q :bdelete<CR>
 nmap QQ :bdelete!<CR>
 vnoremap < <gv
 vnoremap > >gv
-nmap <leader>n :NERDTreeFind<CR>
+nmap <leader>n :Lexplore<CR>
 
 " ------ syntastic and neomake -------
 if has('nvim')
