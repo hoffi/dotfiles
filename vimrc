@@ -6,7 +6,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'justinmk/vim-dirvish'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'rhysd/clever-f.vim'
 Plug 'benekastah/neomake'
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' } | Plug 'benmills/vimux', { 'for': 'ruby' }
@@ -42,6 +41,7 @@ if executable('ag')
   nnoremap K :Ag <C-R><C-W><CR>
   command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 endif
+
 
 if has('nvim')
   let g:loaded_python_provider = 1
