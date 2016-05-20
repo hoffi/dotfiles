@@ -1,16 +1,14 @@
 set nocompatible
 call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'rstacruz/vim-opinion'
-Plug 'tpope/vim-vinegar'
 Plug 'christophermca/meta5'
 Plug 'sheerun/vim-polyglot'
+Plug 'justinmk/vim-dirvish'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'kana/vim-submode'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'benekastah/neomake'
 Plug 'rhysd/clever-f.vim'
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } | Plug 'junegunn/limelight.vim'
+Plug 'benekastah/neomake'
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' } | Plug 'benmills/vimux', { 'for': 'ruby' }
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise', { 'for': 'ruby' } " Puts end for if, for, do, def, etc...
@@ -18,9 +16,6 @@ Plug 'tomtom/tcomment_vim' " gcc command to comment out code
 Plug 'Raimondi/delimitMate' " Automatic closing of brackets, quotes, ...
 Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
-
-let g:netrw_preview = 1
-let g:netrw_liststyle = 3
 
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
@@ -63,8 +58,8 @@ set splitbelow
 set splitright
 
 " Faster key bindings
-set timeoutlen=400
-set ttimeoutlen=400
+set timeoutlen=500
+set ttimeoutlen=500
 
 autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
 
@@ -72,7 +67,6 @@ autocmd BufWritePre * silent! :%s/\s\+$//e " i dont like trailing whitespaces
 autocmd FileType ruby iab <buffer> pry! require 'pry'; binding.pry
 autocmd FileType ruby iab <buffer> vcr! VCR.record_this_example
 autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', full: true
-autocmd FileType javascript inoremap <buffer> ƒ function() {<CR>}<up><end><left><left><left>
 
 set t_Co=256
 set background=dark
@@ -93,33 +87,12 @@ nmap Q :bdelete<CR>
 nmap QQ :bdelete!<CR>
 vnoremap < <gv
 vnoremap > >gv
-nmap <leader>n :Lexplore<CR>
 
 " ------ syntastic and neomake -------
 if has('nvim')
   autocmd! BufWritePost *.rb,*.js Neomake
 endif
 let g:neomake_javascript_enabled_makers = ['eslint']
-
-" ------ Goyo ------
-function! s:goyo_enter()
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  set noshowmode
-  set scrolloff=999
-  Limelight
-endfunction
-
-function! s:goyo_leave()
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showmode
-  set scrolloff=4
-  Limelight!
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " ---- vim-vroom settings ----
 let g:vroom_use_vimux = 1
@@ -134,28 +107,16 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 
+" ---- dirvish ----
+function DirvishCommand(command)
+  call system(a:command)
+  :Dirvish %
+endfunction
+au FileType dirvish map <buffer> D :call DirvishCommand("rm -rf <c-r><c-a>")
+au FileType dirvish map <buffer> d :call DirvishCommand("mkdir ".expand("%")."")<left><left>
+au FileType dirvish map <buffer> R :call DirvishCommand("mv <c-r><c-a> <c-r><c-a>")<left><left>
+au FileType dirvish map <buffer> % :e %
+
 if &shell =~# 'fish$'
   set shell=sh
 endif
-
-" ----- Vim Submode ------
-let g:submode_always_show_submode = 1
-let g:submode_timeout = 0
-let g:submode_keysqs_to_leave = '<Esc>'
-
-" Window Management
-call submode#enter_with('window', 'n', '', '<C-w>')
-
-for key in ['a','b','c','d','e','f','g','h','i','j','k','l','m',
-\           'n','o','p','q','r','s','t','u','v','w','x','y','z']
-  call submode#map('window', 'n', '', key, '<C-w>' . key)
-  call submode#map('window', 'n', '', toupper(key), '<C-w>' . toupper(key))
-  call submode#map('window', 'n', '', '<C-' . key . '>', '<C-w>' . '<C-'.key . '>')
-endfor
-
-call submode#map('window', 'n', '', '=', '<C-w>=')
-call submode#map('window', 'n', '', '<bar>', '<C-w><bar>')
-call submode#map('window', 'n', '', '+', '3<C-w>+')
-call submode#map('window', 'n', '', '-', '3<C-w>-')
-call submode#map('window', 'n', '', '<', '5<C-w><')
-call submode#map('window', 'n', '', '>', '5<C-w>>')
