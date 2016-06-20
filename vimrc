@@ -2,12 +2,15 @@ set nocompatible
 call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'rstacruz/vim-opinion'
 Plug 'christophermca/meta5'
+Plug 'lifepillar/vim-solarized8'
 Plug 'sheerun/vim-polyglot'
 Plug 'justinmk/vim-dirvish'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'rhysd/clever-f.vim'
 Plug 'benekastah/neomake'
+Plug 'mhinz/vim-grepper'
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' } | Plug 'benmills/vimux', { 'for': 'ruby' }
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise', { 'for': 'ruby' } " Puts end for if, for, do, def, etc...
@@ -19,7 +22,7 @@ call plug#end()
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+let g:ctrlp_reuse_window = 'dirvish\|help\|quickfix'
 " ignore space key in CtrlP
 let g:ctrlp_abbrev = {
     \ 'gmode': 'i',
@@ -37,9 +40,8 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore ".git" --hidden -i'
 	let g:ctrlp_lazy_update = 30
-  set grepprg=ag\ --nogroup\ --nocolor
-  nnoremap K :Ag <C-R><C-W><CR>
-  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+  nnoremap K :Grepper -tool ag -cword -noprompt -grepprg ag --nocolor<cr>
+  command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --nocolor '<args>'
 endif
 
 
@@ -56,6 +58,7 @@ set cc=81
 set textwidth=80
 set splitbelow
 set splitright
+set numberwidth=4
 
 " Faster key bindings
 set timeoutlen=500
@@ -69,10 +72,15 @@ autocmd FileType ruby iab <buffer> vcr! VCR.record_this_example
 autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', full: true
 
 set t_Co=256
-set background=dark
-colorscheme meta5
-let g:airline_theme = 'dark'
+set background=light
+colorscheme solarized8_light_high
+let g:airline_theme = 'solarized'
 let g:airline_extensions = ['tabline', 'quickfix', 'ctrlp']
+let g:solarized_term_italics = 1
+nnoremap <silent> <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
+    \ ? substitute(g:colors_name, 'dark', 'light', '')
+    \ : substitute(g:colors_name, 'light', 'dark', '')
+    \ )<cr>
 
 " I don't want c to copy anything..
 noremap <silent> c "_c
@@ -115,6 +123,7 @@ endfunction
 au FileType dirvish map <buffer> D :call DirvishCommand("rm -rf <c-r><c-a>")
 au FileType dirvish map <buffer> d :call DirvishCommand("mkdir ".expand("%")."")<left><left>
 au FileType dirvish map <buffer> R :call DirvishCommand("mv <c-r><c-a> <c-r><c-a>")<left><left>
+au FileType dirvish map <buffer> C :call DirvishCommand("cp <c-r><c-a> <c-r><c-a>")<left><left>
 au FileType dirvish map <buffer> % :e %
 
 if &shell =~# 'fish$'
