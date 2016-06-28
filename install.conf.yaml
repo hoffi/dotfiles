@@ -10,6 +10,7 @@
     ~/.inputrc: inputrc
     ~/.irbrc: ruby/irbrc
     ~/.pryrc: ruby/pryrc
+    ~/.Xresources: Xresources
     ~/.config/fish/config.fish: config.fish
     ~/.config/fish/functions: functions/
 

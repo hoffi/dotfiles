@@ -2,7 +2,7 @@ set nocompatible
 call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'rstacruz/vim-opinion'
 Plug 'christophermca/meta5'
-Plug 'lifepillar/vim-solarized8'
+Plug 'morhetz/gruvbox'
 Plug 'sheerun/vim-polyglot'
 Plug 'justinmk/vim-dirvish'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -46,7 +46,7 @@ endif
 
 
 if has('nvim')
-  let g:loaded_python_provider = 1
+  let g:loaded_python_provider=1
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
@@ -72,15 +72,11 @@ autocmd FileType ruby iab <buffer> vcr! VCR.record_this_example
 autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', full: true
 
 set t_Co=256
-set background=light
-colorscheme solarized8_light_high
-let g:airline_theme = 'solarized'
+set background=dark
+colorscheme gruvbox
+let g:airline_theme = 'gruvbox'
 let g:airline_extensions = ['tabline', 'quickfix', 'ctrlp']
-let g:solarized_term_italics = 1
-nnoremap <silent> <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
-    \ ? substitute(g:colors_name, 'dark', 'light', '')
-    \ : substitute(g:colors_name, 'light', 'dark', '')
-    \ )<cr>
+let g:gruvbox_italic=1
 
 " I don't want c to copy anything..
 noremap <silent> c "_c
