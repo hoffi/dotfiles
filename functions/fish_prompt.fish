@@ -1,82 +1,37 @@
-set -g pad " "
+set fish_color_normal 5f5f5f
+set fish_color_command 5f87ff
+set fish_color_quote brown
+set fish_color_redirection normal
+set fish_color_end bcbcbc
+set fish_color_error red --bold
+set fish_color_param 5f87ff
+set fish_color_comment red
+set fish_color_match cyan
+set fish_color_search_match --background=purple
+set fish_color_operator cyan
+set fish_color_escape cyan
+set fish_color_cwd 00875f
+set fish_pager_color_prefix cyan
+set fish_pager_color_completion normal
+set fish_pager_color_description 555 yellow
+set fish_pager_color_progress cyan
+set fish_pager_color_secondary
 
-## Function to show a segment
-function prompt_segment -d "Function to show a segment"
-  # Get colors
-  set -l bg $argv[1]
-  set -l fg $argv[2]
+set fish_color_host cyan
+set fish_color_user cyan
 
-  # Set 'em
-  set_color -b $bg
-  set_color $fg
+function hulk::fst; set_color -o 90f; end
+function hulk::snd; set_color -o cF3; end
+function hulk::trd; set_color -o fff; end
+function hulk::dim; set_color -o 555; end
+function hulk::err; set_color -o f30; end
+function off; set_color normal; end
 
-  # Print text
-  if [ -n "$argv[3]" ]
-    echo -n -s $argv[3]
-  end
-end
-
-## Function to show current status
-function show_status -d "Function to show the current status"
-  if [ $RETVAL -ne 0 ]
-    prompt_segment red white " ▲ "
-    set pad ""
-    end
-  if [ -n "$SSH_CLIENT" ]
-      prompt_segment blue white " SSH: "
-      set pad ""
-    end
-end
-
-function show_virtualenv -d "Show active python virtual environments"
-  if set -q VIRTUAL_ENV
-    set -l venvname (basename "$VIRTUAL_ENV")
-    prompt_segment normal white " ($venvname)"
-  end
-end
-
-## Show user if not default
-function show_user -d "Show user"
-  if [ "$USER" != "$default_user" -o -n "$SSH_CLIENT" ]
-    set -l host (hostname -s)
-    set -l who (whoami)
-    prompt_segment normal yellow " $who"
-
-    # Skip @ bit if hostname == username
-    if [ "$USER" != "$HOST" ]
-      prompt_segment normal white "@"
-      prompt_segment normal green "$host "
-      set pad ""
-    end
-    end
-end
-
-# Show directory
-function show_pwd -d "Show the current directory"
-  set -l pwd (prompt_pwd)
-  prompt_segment normal blue "$pad$pwd "
-end
-
-# Show prompt w/ privilege cue
-function show_prompt -d "Shows prompt with cue for current priv"
-  set -l uid (id -u $USER)
-    if [ $uid -eq 0 ]
-    prompt_segment red white " ! "
-    set_color normal
-    echo -n -s " "
-  else
-    prompt_segment normal white " \$ "
-    end
-
-  set_color normal
-end
-
-## SHOW PROMPT
 function fish_prompt
-  set -g RETVAL $status
-  show_status
-  show_virtualenv
-  show_user
-  show_pwd
-  show_prompt
+  set -l code $status
+  function hulk::status::color -S
+    test $code -ne 0; and hulk::err; or hulk::snd
+  end
+  printf (hulk::dim)(date +%H(hulk::status::color):(hulk::dim)%M)(off)
+  printf (hulk::status::color)" ≡ "(off)
 end

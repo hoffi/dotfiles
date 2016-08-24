@@ -45,3 +45,5 @@ Session.vim
 .sass-cache
 
 .autoenv.zsh
+
+vendor/bundle

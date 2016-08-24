@@ -1,29 +1,43 @@
-
-function get_git_status -d "Gets the current git status"
-  if command git rev-parse --is-inside-work-tree >/dev/null 2>&1
-    set -l dirty (command git status -s --ignore-submodules=dirty | wc -l | sed -e 's/^ *//' -e 's/ *$//' 2> /dev/null)
-    set -l ref (command git describe --tags --exact-match ^/dev/null ; or command git symbolic-ref --short HEAD 2> /dev/null ; or command git rev-parse --short HEAD 2> /dev/null)
-
-    if [ "$dirty" != "0" ]
-      set_color -b normal
-      set_color red
-      echo "$dirty changed file"
-      if [ "$dirty" != "1" ]
-        echo "s"
-      end
-      echo " "
-      set_color -b red
-      set_color white
-    else
-      set_color -b cyan
-      set_color white
-    end
-
-    echo " $ref "
-    set_color normal
-   end
+function git_is_repo -d "Check if directory is a repository"
+  test -d .git; or command git rev-parse --git-dir >/dev/null ^/dev/null
 end
 
-function fish_right_prompt -d "Prints right prompt"
-  get_git_status
+function git_branch_name -d "Get current branch name"
+  git_is_repo; and begin
+    command git symbolic-ref --short HEAD
+  end
+end
+
+function git_is_touched -d "Check if repo has any changes"
+  git_is_repo; and begin
+    test -n (echo (command git status --porcelain))
+  end
+end
+
+function fish_right_prompt
+  set -l code $status
+
+  function hulk::status::color -S
+    test $code -ne 0; and echo (hulk::err); or echo (hulk::fst)
+  end
+
+  function hulk::branch_name
+    git_branch_name | tr '[:lower:]' '[:upper:]'
+  end
+
+  set -l base (basename "$PWD")
+
+  if test "$PWD" != "/"
+    prompt_pwd | sed "s|$base|"(hulk::trd)" $base"(off)"|g" \
+    | sed "s|~|"(hulk::status::color)"ᴦ"(off)"|g" \
+    | sed "s|/|"(hulk::status::color)"/"(off)(hulk::dim)"|g"
+  end
+
+  if git_is_repo
+    echo (hulk::status::color)" ≡ "(hulk::snd)(begin
+      git_is_touched; and hulk::branch_name; or echo (hulk::dim)(hulk::branch_name)
+    end)(off)
+  else
+    echo (hulk::status::color)" ≡"(off)
+  end
 end
