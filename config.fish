@@ -14,16 +14,8 @@ for file in (ls ~/.dotfiles/fish)
   source ~/.dotfiles/fish/$file
 end
 
+set LANG de_DE.UTF-8
+
 if test -e ~/.local.fish
   source ~/.local.fish
 end
-
-# TODO: WIP
-# function __set_fish_abbr --on-variable PWD
-#   if command git rev-parse --is-inside-work-tree >/dev/null 2>&1
-#     set new_command "git commit --message \"#"(branch_current)":"
-#     set new_ab (string replace -r 'tcm=git commit --message \"#.*:' "tcm=$new_command" $fish_user_abbreviations)
-#     set -U fish_user_abbreviations $new_ab
-#   end
-# end
-# __set_fish_abbr
