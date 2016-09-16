@@ -1,6 +1,6 @@
 set nocompatible
 call plug#begin('~/.dotfiles/vim/plugged')
-Plug 'croaker/mustang-vim'
+Plug 'jacoborus/tender.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree' | Plug 'svenwin/vim-splitted-nerdtree'
 Plug 'jeetsukumaran/vim-buffergator'
@@ -46,6 +46,12 @@ set sidescrolloff=3
 set laststatus=2
 set ttyfast
 set lazyredraw
+if has('guicolors')
+  set guicolors
+endif
+if has('termguicolors')
+  set termguicolors
+endif
 
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -62,6 +68,7 @@ set textwidth=80
 set splitbelow
 set numberwidth=4
 set switchbuf=useopen
+set cursorline
 
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -75,9 +82,10 @@ autocmd FileType ruby iab <buffer> pry! require 'pry'; binding.pry
 autocmd FileType ruby iab <buffer> vcr! VCR.record_this_example
 autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', full: true
 
-colorscheme mustang
+colorscheme tender
 set background=dark
-let g:airline_theme = 'dark'
+let g:tender_airline = 1
+let g:airline_theme = 'tender'
 let g:airline_extensions = ['tabline', 'quickfix', 'ctrlp']
 
 noremap <silent> Y y$
