@@ -1,21 +1,47 @@
 set nocompatible
+runtime macros/matchit.vim
 call plug#begin('~/.dotfiles/vim/plugged')
-Plug 'jacoborus/tender.vim'
+Plug 'NLKNguyen/PaperColor-theme'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree' | Plug 'svenwin/vim-splitted-nerdtree'
-Plug 'jeetsukumaran/vim-buffergator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'benekastah/neomake'
+Plug 'easymotion/vim-easymotion'
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-grepper'
 Plug 'vim-airline/vim-airline'
 Plug 'skalnik/vim-vroom', { 'for': 'ruby' } | Plug 'benmills/vimux', { 'for': 'ruby' }
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise', { 'for': 'ruby' } " Puts end for if, for, do, def, etc...
+Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tomtom/tcomment_vim' " gcc command to comment out code
 Plug 'Raimondi/delimitMate' " Automatic closing of brackets, quotes, ...
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'vim-scripts/AutoComplPop'
 call plug#end()
+
+let g:deoplete#enable_at_startup = 1
+let g:neosnippet#scope_aliases = {}
+let g:neosnippet#scope_aliases['ruby'] = 'ruby,rails'
+
+" SuperTab-like behaviour
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <expr><TAB>
+	\ pumvisible() ? "\<C-n>" :
+	\ neosnippet#expandable_or_jumpable() ?
+	\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+	smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 set history=100
 set autoread
@@ -82,10 +108,10 @@ autocmd FileType ruby iab <buffer> pry! require 'pry'; binding.pry
 autocmd FileType ruby iab <buffer> vcr! VCR.record_this_example
 autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', full: true
 
-colorscheme tender
+colorscheme PaperColor
 set background=dark
 let g:tender_airline = 1
-let g:airline_theme = 'tender'
+let g:airline_theme = 'PaperColor'
 let g:airline_extensions = ['tabline', 'quickfix', 'ctrlp']
 
 noremap <silent> Y y$
@@ -117,12 +143,16 @@ let g:ctrlp_reuse_window = 'dirvish\|help\|quickfix'
 nnoremap <leader>sb :CtrlPBuffer<CR>
 
 if executable('ag')
-	" ag is so fast
   let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore ".git" --hidden -i'
-  nnoremap K :Grepper -tool ag -cword -noprompt -grepprg ag --nocolor<cr>
-  command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --nocolor '<args>'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore ".git" -i'
 endif
+if executable('rg')
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_user_command = 'rg %s -l --files -i --vimgrep'
+endif
+
+nnoremap K :Grepper -tool rg -cword -noprompt -grepprg rg --nocolor<cr>
+command! -nargs=* Ag Grepper -noprompt -tool rg -grepprg rg --nocolor '<args>'
 
 " ------ syntastic and neomake -------
 if has('nvim')
