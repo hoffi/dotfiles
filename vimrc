@@ -27,6 +27,11 @@ let g:deoplete#enable_at_startup = 1
 let g:neosnippet#scope_aliases = {}
 let g:neosnippet#scope_aliases['ruby'] = 'ruby,rails'
 
+augroup vimrc-sync-fromstart
+  autocmd!
+  autocmd BufEnter * :syntax sync fromstart
+augroup END
+
 " SuperTab-like behaviour
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -126,33 +131,17 @@ vnoremap < <gv
 vnoremap > >gv
 nmap - :call splittednerdtree#revealFile()<CR>
 
-let g:buffergator_autoupdate = 1
-let g:buffergator_sort_regime = 'mru'
-let g:buffergator_suppress_keymaps = 1
-let g:buffergator_autodismiss_on_select = 0
-let g:buffergator_vsplit_size = 25
-let g:buffergator_hsplit_size = 5
-let g:buffergator_viewport_split_policy = 'R'
-nmap <leader>t :BuffergatorOpen<CR>
-nmap <leader>T :BuffergatorClose<CR>
-
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
-" let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_reuse_window = 'dirvish\|help\|quickfix'
 nnoremap <leader>sb :CtrlPBuffer<CR>
 
 if executable('ag')
   let g:ctrlp_use_caching = 0
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore ".git" -i'
 endif
-if executable('rg')
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'rg %s -l --files -i --vimgrep'
-endif
 
-nnoremap K :Grepper -tool rg -cword -noprompt -grepprg rg --nocolor<cr>
-command! -nargs=* Ag Grepper -noprompt -tool rg -grepprg rg --nocolor '<args>'
+nnoremap K :Grepper -tool ag -cword -noprompt -grepprg ag --nocolor<cr>
+command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --nocolor '<args>'
 
 " ------ syntastic and neomake -------
 if has('nvim')
@@ -171,9 +160,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-
-let g:NERDTreeHijackNetrw = 1
-let g:NERDTreeAutoDeleteBuffer = 1
 
 if &shell =~# 'fish$'
   set shell=sh
