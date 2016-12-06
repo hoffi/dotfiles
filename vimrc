@@ -1,55 +1,28 @@
 set nocompatible
 runtime macros/matchit.vim
 call plug#begin('~/.dotfiles/vim/plugged')
-Plug 'NLKNguyen/PaperColor-theme'
 Plug 'sheerun/vim-polyglot'
-Plug 'scrooloose/nerdtree' | Plug 'svenwin/vim-splitted-nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'benekastah/neomake'
-Plug 'easymotion/vim-easymotion'
-Plug 'Shougo/deoplete.nvim'
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'easymotion/vim-easymotion'
-Plug 'mhinz/vim-grepper'
+Plug 'mhartington/oceanic-next'
 Plug 'vim-airline/vim-airline'
-Plug 'skalnik/vim-vroom', { 'for': 'ruby' } | Plug 'benmills/vimux', { 'for': 'ruby' }
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
-Plug 'tpope/vim-endwise', { 'for': 'ruby' } " Puts end for if, for, do, def, etc...
+Plug 'tpope/vim-endwise', { 'for': 'ruby' } " Puts end for if, for, do, def, ...
 Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tomtom/tcomment_vim' " gcc command to comment out code
 Plug 'Raimondi/delimitMate' " Automatic closing of brackets, quotes, ...
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'mhinz/vim-grepper'
+Plug 'janko-m/vim-test' " Testrunner
+Plug 'w0rp/ale' " Linter
 call plug#end()
-
-let g:deoplete#enable_at_startup = 1
-let g:neosnippet#scope_aliases = {}
-let g:neosnippet#scope_aliases['ruby'] = 'ruby,rails'
 
 augroup vimrc-sync-fromstart
   autocmd!
   autocmd BufEnter * :syntax sync fromstart
 augroup END
 
-" SuperTab-like behaviour
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-imap <expr><TAB>
-	\ pumvisible() ? "\<C-n>" :
-	\ neosnippet#expandable_or_jumpable() ?
-	\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-	smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
 set history=100
-set autoread
 set mouse=a
 
 set tabstop=2
@@ -89,7 +62,6 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
-let loaded_netrwPlugin = 1
 let mapleader=" "
 let g:mapleader=" "
 set encoding=utf-8
@@ -113,13 +85,11 @@ autocmd FileType ruby iab <buffer> pry! require 'pry'; binding.pry
 autocmd FileType ruby iab <buffer> vcr! VCR.record_this_example
 autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', full: true
 
-colorscheme PaperColor
+colorscheme OceanicNext
 set background=dark
-let g:tender_airline = 1
-let g:airline_theme = 'PaperColor'
+let g:airline_theme = 'oceanicnext'
 let g:airline_extensions = ['tabline', 'quickfix', 'ctrlp']
 
-noremap <silent> Y y$
 nnoremap <leader>w :w<CR>
 map 0 ^
 nnoremap <silent> <C-P> :bp<CR>
@@ -129,37 +99,41 @@ nmap Q :bdelete<CR>
 nmap <leader>Q :bwipeout<CR>
 vnoremap < <gv
 vnoremap > >gv
-nmap - :call splittednerdtree#revealFile()<CR>
 
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
 nnoremap <leader>sb :CtrlPBuffer<CR>
 
 if executable('ag')
   let g:ctrlp_use_caching = 0
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore ".git" -i'
+  nnoremap K :Grepper -tool ag -cword -noprompt -grepprg ag --nocolor<cr>
+  command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --nocolor '<args>'
 endif
 
-nnoremap K :Grepper -tool ag -cword -noprompt -grepprg ag --nocolor<cr>
-command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --nocolor '<args>'
 
-" ------ syntastic and neomake -------
+" ---- vim-test settings ----
 if has('nvim')
-  autocmd! BufWritePost *.rb Neomake
-endif
-
-" ---- vim-vroom settings ----
-let g:vroom_use_vimux = 1
-let g:vroom_use_bundle_exec = 1
-let g:vroom_use_zeus = 1 " Always use zeus when it is running!
+  let test#strategy = "dispatch"
+end
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 " ---- airline ----
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 0
+nmap - :edit .<CR>
 
 if &shell =~# 'fish$'
   set shell=sh
