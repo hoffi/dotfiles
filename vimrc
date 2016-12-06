@@ -112,7 +112,6 @@ if executable('ag')
   command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --nocolor '<args>'
 endif
 
-
 " ---- vim-test settings ----
 if has('nvim')
   let test#strategy = "dispatch"

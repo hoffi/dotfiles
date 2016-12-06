@@ -19,3 +19,5 @@ set LANG de_DE.UTF-8
 if test -e ~/.local.fish
   source ~/.local.fish
 end
+
+status --is-interactive; and . (rbenv init -|psub)
