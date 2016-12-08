@@ -112,9 +112,8 @@ if executable('ag')
   command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --nocolor '<args>'
 endif
 
-" ---- vim-test settings ----
 if has('nvim')
-  let test#strategy = "dispatch"
+  let test#strategy = "neovim"
 end
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
@@ -122,7 +121,9 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
-" ---- airline ----
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 1
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 0
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -132,7 +133,15 @@ let g:airline_right_sep = ''
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 0
-nmap - :edit .<CR>
+func! CreateOrReuseNetrw()
+  if exists("w:netrw_rexlocal")
+    Rexplore
+  else
+    Explore .
+  end
+endfunc
+
+nmap - :call CreateOrReuseNetrw()<CR>
 
 if &shell =~# 'fish$'
   set shell=sh
