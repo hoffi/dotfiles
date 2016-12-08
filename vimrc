@@ -1,20 +1,19 @@
 set nocompatible
-runtime macros/matchit.vim
 call plug#begin('~/.dotfiles/vim/plugged')
+Plug 'tpope/vim-sensible'
 Plug 'sheerun/vim-polyglot'
 Plug 'mhartington/oceanic-next'
 Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
-Plug 'tpope/vim-endwise', { 'for': 'ruby' } " Puts end for if, for, do, def, ...
-Plug 'ecomba/vim-ruby-refactoring', { 'for': 'ruby' }
+Plug 'tpope/vim-endwise', { 'for': 'ruby' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
-Plug 'tomtom/tcomment_vim' " gcc command to comment out code
-Plug 'Raimondi/delimitMate' " Automatic closing of brackets, quotes, ...
+Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'mhinz/vim-grepper'
-Plug 'janko-m/vim-test' " Testrunner
-Plug 'w0rp/ale' " Linter
+Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
+Plug 'janko-m/vim-test', { 'on': ['TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit'] }
+Plug 'w0rp/ale'
 call plug#end()
 
 augroup vimrc-sync-fromstart
@@ -22,34 +21,20 @@ augroup vimrc-sync-fromstart
   autocmd BufEnter * :syntax sync fromstart
 augroup END
 
-set history=100
 set mouse=a
-
 set tabstop=2
-set shiftwidth=2
 set softtabstop=2
-set smarttab
 set expandtab
 set nowrap
 set noesckeys
-
-set cindent
-set showmatch
-set matchtime=4
-
-set hlsearch
-set incsearch
 set ignorecase
 set smartcase
-
 set number
-set numberwidth=4
-set cmdheight=1
-set so=5
-set sidescrolloff=3
-set laststatus=2
-set ttyfast
 set lazyredraw
+set splitbelow
+set switchbuf=useopen
+set cursorline
+
 if has('guicolors')
   set guicolors
 endif
@@ -60,6 +45,9 @@ endif
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+  " https://github.com/christoomey/vim-tmux-navigator#it-doesnt-work-in-neovim-specifically-c-h
+  nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 endif
 
 let mapleader=" "
@@ -68,10 +56,6 @@ set encoding=utf-8
 set ffs=unix,mac,dos
 set cc=81
 set textwidth=80
-set splitbelow
-set numberwidth=4
-set switchbuf=useopen
-set cursorline
 
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -88,7 +72,7 @@ autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', 
 colorscheme OceanicNext
 set background=dark
 let g:airline_theme = 'oceanicnext'
-let g:airline_extensions = ['tabline', 'quickfix', 'ctrlp']
+let g:airline_extensions = ['quickfix', 'tabline', 'ctrlp']
 
 nnoremap <leader>w :w<CR>
 map 0 ^
@@ -102,7 +86,8 @@ vnoremap > >gv
 
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_reuse_window = 'netrw\|help\|quickfix'
+let g:ctrlp_reuse_window = 'netrw\|help'
+let g:ctrlp_lazy_update = 50
 nnoremap <leader>sb :CtrlPBuffer<CR>
 
 if executable('ag')
@@ -126,9 +111,17 @@ let g:ale_lint_on_enter = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 0
-let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#right_sep = ''
+let g:airline#extensions#tabline#right_alt_sep = ''
+let g:airline#extensions#tabline#show_splits = 1
 
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -142,7 +135,3 @@ func! CreateOrReuseNetrw()
 endfunc
 
 nmap - :call CreateOrReuseNetrw()<CR>
-
-if &shell =~# 'fish$'
-  set shell=sh
-endif
