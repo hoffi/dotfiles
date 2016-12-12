@@ -23,6 +23,7 @@ augroup END
 
 set mouse=a
 set tabstop=2
+set shiftwidth=2
 set softtabstop=2
 set expandtab
 set nowrap
@@ -130,7 +131,10 @@ func! CreateOrReuseNetrw()
   if exists("w:netrw_rexlocal")
     Rexplore
   else
-    Explore .
+    let s:filename = expand("%:t")
+    Explore %:p:h
+    execute '/ ' . s:filename . '$'
+    noh
   end
 endfunc
 
