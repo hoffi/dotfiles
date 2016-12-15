@@ -11,7 +11,7 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', 'Ag'] }
 Plug 'janko-m/vim-test', { 'on': ['TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit'] }
 Plug 'w0rp/ale'
 call plug#end()
@@ -109,6 +109,7 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 0
