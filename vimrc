@@ -1,8 +1,7 @@
 set nocompatible
 call plug#begin('~/.dotfiles/vim/plugged')
-Plug 'tpope/vim-sensible'
 Plug 'sheerun/vim-polyglot'
-Plug 'mhartington/oceanic-next'
+Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
@@ -11,7 +10,7 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'mhinz/vim-grepper', { 'on': ['Grepper', 'Ag'] }
+Plug 'mhinz/vim-grepper'
 Plug 'janko-m/vim-test', { 'on': ['TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit'] }
 Plug 'w0rp/ale'
 call plug#end()
@@ -47,6 +46,8 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
+  let g:python_host_prog = '/usr/bin/python'
+
   " https://github.com/christoomey/vim-tmux-navigator#it-doesnt-work-in-neovim-specifically-c-h
   nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 endif
@@ -70,9 +71,12 @@ autocmd FileType ruby iab <buffer> pry! require 'pry'; binding.pry
 autocmd FileType ruby iab <buffer> vcr! VCR.record_this_example
 autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', full: true
 
-colorscheme OceanicNext
+autocmd FileType netrw setl bufhidden=wipe
+
+colorscheme one
 set background=dark
-let g:airline_theme = 'oceanicnext'
+let g:one_allow_italics = 1
+let g:airline_theme = 'one'
 let g:airline_extensions = ['quickfix', 'tabline', 'ctrlp']
 
 nnoremap <leader>w :w<CR>
@@ -88,7 +92,7 @@ vnoremap > >gv
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_reuse_window = 'netrw\|help'
-let g:ctrlp_lazy_update = 50
+let g:ctrlp_lazy_update = 60
 nnoremap <leader>sb :CtrlPBuffer<CR>
 
 if executable('ag')

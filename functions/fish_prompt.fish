@@ -1,123 +1,57 @@
-# name: CoffeeAndCode
-# Theme colors
-set fish_color_normal 5f5f5f
-set fish_color_command 5f87ff
-set fish_color_quote brown
-set fish_color_redirection normal
-set fish_color_end bcbcbc
-set fish_color_error red --bold
-set fish_color_param 5f87ff
-set fish_color_comment red
-set fish_color_match cyan
-set fish_color_search_match --background=purple
-set fish_color_operator cyan
-set fish_color_escape cyan
-set fish_color_cwd 00875f
-set fish_pager_color_prefix cyan
-set fish_pager_color_completion normal
-set fish_pager_color_description 555 yellow
-set fish_pager_color_progress cyan
-set fish_pager_color_secondary
+# You can override some default options with config.fish:
+#
+set -g theme_short_path yes
 
-set fish_color_autosuggestion 006363
-set fish_color_cwd_root red
-set fish_color_history_current cyan
-set fish_color_selection --background=green
-set fish_color_status red
-set fish_color_valid_path --underline
+function fish_prompt
+  set -l last_command_status $status
+  set -l cwd
 
-set fish_color_host cyan
-set fish_color_user cyan
-
-# Git prompt setup
-set __fish_git_prompt_char_untrackedfiles '*'
-set __fish_git_prompt_color yellow
-set __fish_git_prompt_color_stashstate red --bold
-set __fish_git_prompt_showdirtystate true
-set __fish_git_prompt_showstashstate true
-set __fish_git_prompt_showuntrackedfiles true
-
-
-function fish_prompt --description 'Write out the prompt'
-
-  set -l last_status $status
-
-  # Just calculate these once, to save a few cycles when displaying the prompt
-  if not set -q __fish_prompt_hostname
-    set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
+  if test "$theme_short_path" = 'yes'
+    set cwd (basename (prompt_pwd))
+  else
+    set cwd (prompt_pwd)
   end
 
-  if not set -q __fish_prompt_normal
-    set -g __fish_prompt_normal (set_color normal)
+  set -l fish     "⋊>"
+  set -l ahead    "↑"
+  set -l behind   "↓"
+  set -l diverged "⥄ "
+  set -l dirty    "⨯"
+  set -l none     "◦"
+
+  set -l normal_color     (set_color normal)
+  set -l success_color    (set_color $fish_pager_color_progress ^/dev/null; or set_color cyan)
+  set -l error_color      (set_color $fish_color_error ^/dev/null; or set_color red --bold)
+  set -l directory_color  (set_color $fish_color_quote ^/dev/null; or set_color brown)
+  set -l repository_color (set_color $fish_color_cwd ^/dev/null; or set_color green)
+
+  if test $last_command_status -eq 0
+    echo -n -s $success_color $fish $normal_color
+  else
+    echo -n -s $error_color $fish $normal_color
   end
 
-  function prompt_pwd
-    echo $PWD | sed -e "s|^$HOME|~|"
-  end
+  if git_is_repo
+    if test "$theme_short_path" = 'yes'
+      set root_folder (command git rev-parse --show-toplevel ^/dev/null)
+      set parent_root_folder (dirname $root_folder)
+      set cwd (echo $PWD | sed -e "s|$parent_root_folder/||")
 
-  if not set -q -g __fish_classic_git_functions_defined
-
-    set -g __fish_classic_git_functions_defined
-
-    function __fish_repaint_user --on-variable fish_color_user --description "Event handler, repaint when fish_color_user changes"
-      if status --is-interactive
-        set -e __fish_prompt_user
-        commandline -f repaint ^/dev/null
-      end
+      echo -n -s " " $directory_color $cwd $normal_color
+    else
+      echo -n -s " " $directory_color $cwd $normal_color
     end
 
-    function __fish_repaint_host --on-variable fish_color_host --description "Event handler, repaint when fish_color_host changes"
-      if status --is-interactive
-        set -e __fish_prompt_host
-        commandline -f repaint ^/dev/null
-      end
-    end
+    echo -n -s " on " $repository_color (git_branch_name) $normal_color " "
 
-    function __fish_repaint_status --on-variable fish_color_status --description "Event handler; repaint when fish_color_status changes"
-      if status --is-interactive
-        set -e __fish_prompt_status
-        commandline -f repaint ^/dev/null
-      end
+    if git_is_touched
+      echo -n -s $dirty
+    else
+      echo -n -s (git_ahead $ahead $behind $diverged $none)
     end
+  else
+    echo -n -s " " $directory_color $cwd $normal_color
   end
 
-  set -l delim '$'
-
-  switch $USER
-
-  case root
-
-    if not set -q __fish_prompt_cwd
-      if set -q fish_color_cwd_root
-        set -g __fish_prompt_cwd (set_color $fish_color_cwd_root)
-      else
-        set -g __fish_prompt_cwd (set_color $fish_color_cwd)
-      end
-    end
-
-  case '*'
-
-    if not set -q __fish_prompt_cwd
-      set -g __fish_prompt_cwd (set_color $fish_color_cwd)
-    end
-
-  end
-
-  set -l prompt_status
-  if test $last_status -ne 0
-    if not set -q __fish_prompt_status
-      set -g __fish_prompt_status (set_color $fish_color_status)
-    end
-    set prompt_status "$__fish_prompt_status [$last_status]$__fish_prompt_normal"
-  end
-
-  if not set -q __fish_prompt_user
-    set -g __fish_prompt_user (set_color $fish_color_user)
-  end
-  if not set -q __fish_prompt_host
-    set -g __fish_prompt_host (set_color $fish_color_host)
-  end
-
-  echo -s "$__fish_prompt_user" "$USER" @ "$__fish_prompt_host" "$__fish_prompt_hostname" "$__fish_prompt_normal" ' ' "$__fish_prompt_cwd" (prompt_pwd)
-  echo -s (__fish_git_prompt) "$__fish_prompt_normal" "$delim" ' '
+  echo -n -s " "
 end
