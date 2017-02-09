@@ -1,5 +1,8 @@
 set nocompatible
 call plug#begin('~/.dotfiles/vim/plugged')
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'rbgrouleff/bclose.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'rakr/vim-one'
 Plug 'vim-airline/vim-airline'
@@ -7,6 +10,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise', { 'for': 'ruby' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'slim-template/vim-slim'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
@@ -71,20 +75,26 @@ autocmd FileType ruby iab <buffer> pry! require 'pry'; binding.pry
 autocmd FileType ruby iab <buffer> vcr! VCR.record_this_example
 autocmd FileType ruby iab <buffer> screenshot! page.save_screenshot 'test.png', full: true
 
-autocmd FileType netrw setl bufhidden=wipe
-
 colorscheme one
 set background=dark
 let g:one_allow_italics = 1
 let g:airline_theme = 'one'
 let g:airline_extensions = ['quickfix', 'tabline', 'ctrlp']
 
+function CloseNERD()
+  if (exists("b:NERDTree"))
+    q
+  else
+    Bclose
+  end
+endfunction
+
 nnoremap <leader>w :w<CR>
 map 0 ^
 nnoremap <silent> <C-P> :bp<CR>
 nnoremap <silent> <C-N> :bn<CR>
 map // :nohlsearch<CR>
-nmap Q :bdelete<CR>
+nmap Q :call CloseNERD()<CR>
 nmap <leader>Q :bwipeout<CR>
 vnoremap < <gv
 vnoremap > >gv
@@ -118,7 +128,6 @@ let g:ale_lint_on_save = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline_left_sep = ''
@@ -129,18 +138,11 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 let g:airline#extensions#tabline#show_splits = 1
 
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 0
-func! CreateOrReuseNetrw()
-  if exists("w:netrw_rexlocal")
-    Rexplore
-  else
-    let s:filename = expand("%:t")
-    Explore %:p:h
-    execute '/ ' . s:filename . '$'
-    noh
-  end
-endfunc
+nmap - :NERDTreeTabsOpen<CR>:NERDTreeTabsFind<CR>
 
-nmap - :call CreateOrReuseNetrw()<CR>
+let g:NERDTreeHijackNetrw = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeMinimalUI = 1
+
+let g:nerdtree_tabs_autoclose = 0
+let g:nerdtree_tabs_open_on_console_startup = 1
