@@ -2,13 +2,14 @@ set -g fish_key_bindings fish_default_key_bindings
 set -x EDITOR nvim
 set fish_user_paths "/usr/local/bin"
 
-set fish_user_abbreviations
-function abbr_add; set fish_user_abbreviations $fish_user_abbreviations $argv; end
-abbr_add "cl=clear"
-abbr_add "eixt=exit"
-abbr_add "rbb=bundle"
-abbr_add "rbbe=bundle exec"
-abbr_add "rbbi=bundle install --path vendor/bundle"
+if not set -q abbrs_initialized
+  set -U abbrs_initialized
+  abbr cl 'clear'
+  abbr eixt 'exit'
+  abbr rbb 'bundle'
+  abbr rbbe 'bundle exec'
+  abbr rbbi 'bundle install --jobs 4 --path vendor/bundle'
+end
 
 for file in (ls ~/.dotfiles/fish)
   source ~/.dotfiles/fish/$file

@@ -120,6 +120,10 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+let test#ruby#rspec#options = {
+  \ 'nearest':    '--format documentation',
+  \ 'file':    '--format documentation',
+\}
 
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 1
