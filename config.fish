@@ -16,6 +16,7 @@ for file in (ls ~/.dotfiles/fish)
 end
 
 set LANG de_DE.UTF-8
+status --is-interactive; and source (rbenv init -|psub)
 
 if test -e ~/.local.fish
   source ~/.local.fish
