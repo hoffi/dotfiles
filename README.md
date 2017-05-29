@@ -4,12 +4,19 @@
 
 ## Installation
 Clone the repo and run the install script:
+
+Fish:
 ```fish
-git clone git@github.com:hoffi/dotfiles.git ~/.dotfiles; and cd ~/.dotfiles; and ./install
+git clone git@github.com:hoffi/dotfiles.git ~/.dotfiles; and cd ~/.dotfiles; and make
+```
+
+Bash:
+```fish
+git clone git@github.com:hoffi/dotfiles.git ~/.dotfiles && cd ~/.dotfiles && make
 ```
 
 To update simply `cd` into the `.dotfiles` directory and `git pull`.
-If new files were added to the repo simply run `./install` again and it will setup
+If new files were added to the repo simply run `make` again and it will setup
 everything correctly
 
 ## Configure git user
