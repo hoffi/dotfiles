@@ -2,55 +2,44 @@ let loaded_netrw = 1
 let loaded_netrwPlugin = 1
 
 call plug#begin('~/.dotfiles/vim/plugged')
-Plug 'justinmk/vim-dirvish'
-Plug 'sonph/onehalf', { 'rtp': 'vim/' }
-Plug 'vim-airline/vim-airline'
 Plug 'sheerun/vim-polyglot'
+Plug 'justinmk/vim-dirvish'
+Plug 'KeitaNakamura/neodark.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby', 'on': 'BlockToggle' }
 Plug 'tpope/vim-endwise', { 'for': 'ruby' }
-" Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
 Plug 'janko-m/vim-test', { 'on': ['TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit'] }
 Plug 'w0rp/ale', { 'for': ['ruby', 'javascript', 'elixir'] }
-Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+Plug 'itchyny/lightline.vim' | Plug 'hoffi/leanbuftabline'
+Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 call plug#end()
 
 set mouse=a
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set wrap
 set hidden
+set tabstop=2 shiftwidth=2 softtabstop=2 expandtab wrap
 set ignorecase smartcase
-set number
+set number laststatus=2
 set lazyredraw
 set splitbelow splitright
-" set cursorline
 set noerrorbells visualbell t_vb=
 set formatoptions=tjlnwc
-set regexpengine=1
+set noshowcmd noshowmode
 set synmaxcol=250
 
 let mapleader=" "
 let g:mapleader=" "
 set encoding=utf-8
 set ffs=unix,mac,dos
-set cc=81
-set textwidth=80
+set textwidth=80 cc=81
 
+let g:neodark#background = '#202020'
+colorscheme neodark
 set background=dark
-colorscheme onehalfdark
-let g:airline_theme = 'onehalfdark'
-let g:airline_extensions = ['tabline']
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_tabs = 0
-let g:airline#extensions#tabline#show_tab_type = 0
 
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -74,16 +63,14 @@ nmap Q :Sayonara<CR>
 map 0 ^
 
 let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
-let &fillchars = 'diff: '  " ▚
 let &showbreak = '↪ '
-highlight VertSplit ctermfg=242
 
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_lazy_update = 60
 
 if executable('ag')
   let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag %s --nocolor -g "" --ignore ".git"'
+  let g:ctrlp_user_command = 'ags --nocolor -g "" --ignore ".git"'
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Search for word under cursor with Ag
@@ -94,6 +81,8 @@ if executable('ag')
 endif
 
 if has('nvim')
+  set termguicolors
+
   let test#strategy = "neovim"
   " https://github.com/christoomey/vim-tmux-navigator#it-doesnt-work-in-neovim-specifically-c-h
   nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
@@ -111,10 +100,10 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 
-nmap - :Dirvish %<CR>
+nmap - :Dirvish<CR>
 let g:dirvish_mode = ':sort r /[^\/]$/'
 function Dmkdir(path)
-  :silent exec "!mkdir %" . a:path
+  :silent exec "!mkdir" . a:path
   :silent edit
 endfunction
 
@@ -125,9 +114,11 @@ augroup my_dirvish_events
 
   " File edit mappings
   au FileType dirvish
-    \ nnoremap <buffer> maf :e %
+    \ nnoremap <buffer> maf :e
     \| nnoremap <buffer> mad :call Dmkdir("")<left><left>
     \| noremap <buffer> md :Shdo rm -r {}<CR>
     \| noremap <buffer> mc :Shdo cp -R {} {}
     \| noremap <buffer> mm :Shdo mv {} {}
 augroup END
+
+let g:lightline = { 'colorscheme': 'neodark', 'enable': { 'tabline': 0 } }
