@@ -17,5 +17,3 @@ setup_vim:
 	ln $(LN_FLAGS) $(DOTFILES)/vimrc ${HOME}/.config/nvim/init.vim
 setup_ruby:
 	ln $(LN_FLAGS) $(DOTFILES)/gemrc ${HOME}/.gemrc
-	ln $(LN_FLAGS) $(DOTFILES)/ruby/irbrc ${HOME}/.irbrc
-	ln $(LN_FLAGS) $(DOTFILES)/ruby/pryrc ${HOME}/.pryrc

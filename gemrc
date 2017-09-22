@@ -6,3 +6,5 @@
 :backtrace: false
 :verbose: true
 gem: --no-document
+install: --no-document --no-rdoc --no-ri
+update: --no-document --no-rdoc --no-ri

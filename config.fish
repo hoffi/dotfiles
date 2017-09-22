@@ -1,6 +1,6 @@
-set -g fish_key_bindings fish_default_key_bindings
-set -x EDITOR nvim
 set fish_user_paths "/usr/local/bin"
+set LANG de_DE.UTF-8
+set -x EDITOR nvim
 
 if not set -q abbrs_initialized
   set -U abbrs_initialized
@@ -14,9 +14,6 @@ end
 for file in (ls ~/.dotfiles/fish)
   source ~/.dotfiles/fish/$file
 end
-
-set LANG de_DE.UTF-8
-status --is-interactive; and source (rbenv init -|psub)
 
 if test -e ~/.local.fish
   source ~/.local.fish

@@ -4,7 +4,7 @@ let loaded_netrwPlugin = 1
 call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'justinmk/vim-dirvish'
-Plug 'KeitaNakamura/neodark.vim'
+Plug 'noah/fu'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby', 'on': 'BlockToggle' }
 Plug 'tpope/vim-endwise', { 'for': 'ruby' }
@@ -37,9 +37,8 @@ set encoding=utf-8
 set ffs=unix,mac,dos
 set textwidth=80 cc=81
 
-let g:neodark#background = '#202020'
-colorscheme neodark
 set background=dark
+colorscheme fu
 
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -70,7 +69,7 @@ let g:ctrlp_lazy_update = 60
 
 if executable('ag')
   let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ags --nocolor -g "" --ignore ".git"'
+  let g:ctrlp_user_command = 'ag %s --nocolor -g "" --ignore ".git"'
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Search for word under cursor with Ag
@@ -82,8 +81,14 @@ endif
 
 if has('nvim')
   set termguicolors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
+
+  let test#ruby#bundle_exec = 1
+  let test#ruby#use_binstubs = 0
   let test#strategy = "neovim"
+
   " https://github.com/christoomey/vim-tmux-navigator#it-doesnt-work-in-neovim-specifically-c-h
   nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 endif
@@ -100,10 +105,10 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 
-nmap - :Dirvish<CR>
+nmap - :Dirvish %<CR>
 let g:dirvish_mode = ':sort r /[^\/]$/'
 function Dmkdir(path)
-  :silent exec "!mkdir" . a:path
+  :silent exec "!mkdir " . a:path
   :silent edit
 endfunction
 
@@ -114,11 +119,11 @@ augroup my_dirvish_events
 
   " File edit mappings
   au FileType dirvish
-    \ nnoremap <buffer> maf :e
+    \ nnoremap <buffer> maf :e %
     \| nnoremap <buffer> mad :call Dmkdir("")<left><left>
     \| noremap <buffer> md :Shdo rm -r {}<CR>
     \| noremap <buffer> mc :Shdo cp -R {} {}
     \| noremap <buffer> mm :Shdo mv {} {}
 augroup END
 
-let g:lightline = { 'colorscheme': 'neodark', 'enable': { 'tabline': 0 } }
+let g:lightline = { 'colorscheme': 'wombat', 'enable': { 'tabline': 0 } }
