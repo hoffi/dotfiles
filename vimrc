@@ -3,20 +3,21 @@ let loaded_netrwPlugin = 1
 
 call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'sheerun/vim-polyglot'
-Plug 'justinmk/vim-dirvish'
-Plug 'noah/fu'
+Plug 'vim-airline/vim-airline'
+Plug 'cocopon/vaffle.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jgdavey/vim-blockle', { 'for': 'ruby', 'on': 'BlockToggle' }
-Plug 'tpope/vim-endwise', { 'for': 'ruby' }
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'jgdavey/vim-blockle', { 'for': 'ruby', 'on': 'BlockToggle' }
+Plug 'tpope/vim-endwise', { 'for': 'ruby' }
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
 Plug 'janko-m/vim-test', { 'on': ['TestNearest', 'TestFile', 'TestSuite', 'TestLast', 'TestVisit'] }
 Plug 'w0rp/ale', { 'for': ['ruby', 'javascript', 'elixir'] }
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-Plug 'itchyny/lightline.vim' | Plug 'hoffi/leanbuftabline'
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 set mouse=a
@@ -37,8 +38,11 @@ set encoding=utf-8
 set ffs=unix,mac,dos
 set textwidth=80 cc=81
 
-set background=dark
-colorscheme fu
+set termguicolors
+" let ayucolor="light"
+" let ayucolor="mirage"
+let ayucolor="dark"
+colorscheme ayu
 
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -80,11 +84,7 @@ if executable('ag')
 endif
 
 if has('nvim')
-  set termguicolors
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-
+  set t_ut=
   let test#ruby#bundle_exec = 1
   let test#ruby#use_binstubs = 0
   let test#strategy = "neovim"
@@ -105,25 +105,17 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 
-nmap - :Dirvish %<CR>
-let g:dirvish_mode = ':sort r /[^\/]$/'
-function Dmkdir(path)
-  :silent exec "!mkdir " . a:path
-  :silent edit
+function! s:customize_vaffle_mappings() abort
+  nmap - <Plug>(vaffle-open-parent)
 endfunction
-
-augroup my_dirvish_events
+augroup vimrc_vaffle
   autocmd!
-  " Jump back to project root
-  au FileType dirvish nnoremap <silent><buffer> _ :exec 'pwd \| Dirvish'<CR>
-
-  " File edit mappings
-  au FileType dirvish
-    \ nnoremap <buffer> maf :e %
-    \| nnoremap <buffer> mad :call Dmkdir("")<left><left>
-    \| noremap <buffer> md :Shdo rm -r {}<CR>
-    \| noremap <buffer> mc :Shdo cp -R {} {}
-    \| noremap <buffer> mm :Shdo mv {} {}
+  autocmd FileType vaffle call s:customize_vaffle_mappings()
+  autocmd FileType * nmap - :Vaffle %:p:h<CR>
 augroup END
 
-let g:lightline = { 'colorscheme': 'wombat', 'enable': { 'tabline': 0 } }
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline_highlighting_cache = 1
+let g:airline_extensions = ['ctrlp', 'quickfix', 'tabline', 'ale']
+let g:airline_theme='serene'
