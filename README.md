@@ -5,7 +5,7 @@
 ## Try
 
 ```fish
-docker run -it --rm -v $PWD:/usr/src hoffi/dotfiles
+docker run -it --rm -v $PWD:/usr/src h0ff1/dotfiles
 ```
 
 ## Installation
