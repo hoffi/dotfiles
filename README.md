@@ -2,6 +2,12 @@
 
 ![Screenshot of vim and shell prompt](https://raw.githubusercontent.com/hoffi/dotfiles/fish/screenshot.png)
 
+## Try
+
+```fish
+docker run -it --rm -v $PWD:/usr/src hoffi/dotfiles
+```
+
 ## Installation
 Clone the repo and run the install script:
 
