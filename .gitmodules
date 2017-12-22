@@ -1,3 +1,0 @@
-[submodule "bin/mux"]
-	path = bin/mux
-	url = git@bitbucket.org:snippets/nix-wie-weg/ngyd/mux.git
