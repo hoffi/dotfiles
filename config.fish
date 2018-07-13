@@ -1,6 +1,7 @@
-set fish_user_paths "/usr/local/bin"
+set -g fish_user_paths "/usr/local/bin" $fish_user_paths
 set LANG de_DE.UTF-8
 set -x EDITOR nvim
+set -x GIT_EDITOR nvim
 
 if not set -q abbrs_initialized
   set -U abbrs_initialized

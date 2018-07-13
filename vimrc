@@ -1,13 +1,14 @@
-let loaded_netrw = 1
-let loaded_netrwPlugin = 1
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
 
 call plug#begin('~/.dotfiles/vim/plugged')
 Plug 'sheerun/vim-polyglot'
+Plug 'nightsense/night-and-day'
+Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
-Plug 'cocopon/vaffle.vim'
-Plug 'ayu-theme/ayu-vim'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'cocopon/vaffle.vim'
+Plug 'cloudhead/neovim-fuzzy'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jgdavey/vim-blockle', { 'for': 'ruby', 'on': 'BlockToggle' }
@@ -38,11 +39,17 @@ set encoding=utf-8
 set ffs=unix,mac,dos
 set textwidth=80 cc=81
 
+let base16colorspace=256
 set termguicolors
-" let ayucolor="light"
-" let ayucolor="mirage"
-let ayucolor="dark"
-colorscheme ayu
+let g:nd_themes = [
+  \ ['6:00',  'base16-tomorrow',       'light', 'base16' ],
+  \ ['19:00', 'base16-tomorrow-night', 'dark', 'base16_tomorrow' ]
+  \ ]
+let g:nd_airline = 1
+
+set complete-=i
+set complete-=d
+set complete-=t
 
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -68,26 +75,26 @@ map 0 ^
 let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 let &showbreak = '↪ '
 
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_lazy_update = 60
+nnoremap <leader>f :FuzzyOpen<CR>
 
 if executable('ag')
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag %s --nocolor -g "" --ignore ".git"'
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Search for word under cursor with Ag
-  nnoremap K :Grepper -tool ag -cword -noprompt -grepprg ag --nocolor<cr>
+  nnoremap K :Grepper -tool ag -cword -noprompt -grepprg ag<cr>
+
+  " Search for TODOs with Ag
+  nnoremap ! :Grepper -tool ag -noprompt -grepprg ag "TODO( Stefan)?:"<cr>
 
   " Command :Ag to search
-  command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag --nocolor '<args>'
+  command! -nargs=* Ag Grepper -noprompt -tool ag -grepprg ag '<args>'
 endif
 
 if has('nvim')
-  set t_ut=
+  " set t_ut=
+  let test#strategy = "neovim"
   let test#ruby#bundle_exec = 1
   let test#ruby#use_binstubs = 0
-  let test#strategy = "neovim"
 
   " https://github.com/christoomey/vim-tmux-navigator#it-doesnt-work-in-neovim-specifically-c-h
   nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
@@ -117,5 +124,5 @@ augroup END
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline_highlighting_cache = 1
-let g:airline_extensions = ['ctrlp', 'quickfix', 'tabline', 'ale']
-let g:airline_theme='serene'
+let g:airline_extensions = ['quickfix', 'tabline', 'ale']
+let g:airline_theme='base16'
