@@ -1,17 +1,17 @@
 [color]
   ui = true
 [alias]
-  last-sha = rev-parse HEAD
+  ls = rev-parse HEAD
   mt = mergetool
+[merge]
+  tool = vimdiff
 [mergetool]
   path = nvim
   prompt = false
   trustExitCode = true
   keepBackup = false
-[merge]
-  prompt = false
-  tool = vimdiff
-  conflictstyle = diff3
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [apply]
   whitespace = nowarn
 [push]
@@ -19,7 +19,7 @@
 [core]
   autocrlf = input
   savecrlf = true
-  editor = vim
+  editor = nvim
   excludesfile = ~/.gitignore_global
   commentChar = >
 [include]
