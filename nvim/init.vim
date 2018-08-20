@@ -1,7 +1,8 @@
 source ~/.dotfiles/nvim/plugins.vim
 source ~/.dotfiles/nvim/keybindings.vim
 
-colorscheme Iosvkem
+set background=dark
+colorscheme one
 set termguicolors
 set lazyredraw
 set textwidth=80 cc=81

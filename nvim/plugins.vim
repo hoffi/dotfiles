@@ -14,7 +14,7 @@ if dein#load_state('~/.cache/dein')
  call dein#add('~/.cache/dein') " Let Dein manage Dein
 
  call dein#add('scrooloose/nerdtree')
- call dein#add('neutaaaaan/iosvkem')
+ call dein#add('rakr/vim-one')
  call dein#add('sheerun/vim-polyglot')
  call dein#add('christoomey/vim-tmux-navigator')
  call dein#add('mhinz/vim-sayonara')
@@ -36,6 +36,7 @@ syntax enable
 silent call dein#install()
 
 " Airline
+let g:airline_theme = "one"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline_highlighting_cache = 1
